@@ -5,7 +5,7 @@ description = "A Tauri App to choose a lucky man."
 authors = [ "jwenjian" ]
 license = ""
 repository = ""
-default-run = "app"
+default-run = "LuckyYou"
 edition = "2018"
 build = "src/build.rs"
 
@@ -22,5 +22,5 @@ embedded-server = [ "tauri/embedded-server" ]
 no-server = [ "tauri/no-server" ]
 
 [[bin]]
-name = "app"
+name = "LuckyYou"
 path = "src/main.rs"
