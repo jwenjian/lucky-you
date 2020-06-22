@@ -8,7 +8,7 @@
 
     <el-row class="name-row">
       <el-col :span="12" :offset="6">
-        <h1>{{ selectedImageFileName }}</h1>
+        <h1 id="file-name-item">{{ selectedImageFileName }}</h1>
       </el-col>
     </el-row>
 
@@ -24,7 +24,10 @@
 
     <el-row class="footer-row">
       <el-col :span="12">
-        <p>Made with ❤️ by <a-link url="https://github.com/jwenjian" text="jwenjian"></a-link></p>
+        <p>
+          Made with ❤️ by
+          <a-link url="https://github.com/jwenjian" text="jwenjian"></a-link>
+        </p>
         <div>
           Icons made by
           <i>Freepik</i> from
@@ -38,16 +41,16 @@
 <script>
 import { readBinaryFile, readDir } from "tauri/api/fs";
 import { open } from "tauri/api/dialog";
-import OpenLinkInBrowser from './components/OpenLinkInBrowser'
+import OpenLinkInBrowser from "./components/OpenLinkInBrowser";
 
 export default {
   name: "App",
   components: {
-    'a-link': OpenLinkInBrowser
+    "a-link": OpenLinkInBrowser
   },
   data() {
     return {
-      selectedImageFileName: "Who will be the lucky one?",
+      selectedImageFileName: "Who will be THE one?",
       imageUrl: "/casino.png",
       folderPath: null,
       images: [],
@@ -146,9 +149,9 @@ export default {
                 this.btnType = "success";
                 this.startBtnText = "Start";
                 this.readyForRoll = true;
-                this.imageUrl = this.images[0].uri;
+                this.imageUrl = "/casino.png";
                 this.$message({
-                  duration: 2000,
+                  duration: 1000,
                   position: "bottom",
                   type: "success",
                   message: `${this.images.length} images read successfully!\r\nYou can now start to pick the lucky one.`
@@ -173,12 +176,15 @@ export default {
       }
       this.reset();
 
+      this.imageUrl = '/casino.png';
+      this.btnType = '';
+      this.readyForRoll = false;
       this.startBtnText = "Reading image files...";
       this.convertFile2Images(files);
     },
     reset() {
       this.imageUrl = "/casino.png";
-      this.selectedImageFileName = "Who will be the lucky one?";
+      this.selectedImageFileName = "Who will be THE one?";
       this.imageUrl = null;
       this.idx = 0;
       this.images = [];
@@ -235,15 +241,21 @@ html body {
   border: 2px #207f4c dashed;
 }
 .name-row {
-  margin-top: 1em;
+  margin-top: 0.5em;
 }
 .btn-row {
-  margin-top: 1em;
+  margin-top: 0.5em;
 }
 .footer-row {
   font-size: smaller;
   text-align: left;
   padding-left: 1em;
-  margin-top: 3em;
+  margin-top: 2em;
+}
+#file-name-item {
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
