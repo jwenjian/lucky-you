@@ -1,0 +1,249 @@
+<template>
+  <div id="app">
+    <el-row justify="space-between" class="img-row">
+      <el-col :span="12" :offset="6">
+        <img id="the-img" :src="imageUrl" />
+      </el-col>
+    </el-row>
+
+    <el-row class="name-row">
+      <el-col :span="12" :offset="6">
+        <h1>{{ selectedImageFileName }}</h1>
+      </el-col>
+    </el-row>
+
+    <el-row justify="center" class="btn-row">
+      <el-col :span="12" :offset="6">
+        <el-button :disabled="!readyForRoll" :type="btnType" @click="startRoll">{{ startBtnText }}</el-button>
+        <el-button :disabled="rolling" type="text" @click="selectImagefolder">Select image folder...</el-button>
+      </el-col>
+      <el-col :span="4">
+        <div class="item"></div>
+      </el-col>
+    </el-row>
+
+    <el-row class="footer-row">
+      <el-col :span="12">
+        <p>Made with ❤️ by <a-link url="https://github.com/jwenjian" text="jwenjian"></a-link></p>
+        <div>
+          Icons made by
+          <i>Freepik</i> from
+          <u>www.flaticon.com</u>
+        </div>
+      </el-col>
+    </el-row>
+  </div>
+</template>
+
+<script>
+import { readBinaryFile, readDir } from "tauri/api/fs";
+import { open } from "tauri/api/dialog";
+import OpenLinkInBrowser from './components/OpenLinkInBrowser'
+
+export default {
+  name: "App",
+  components: {
+    'a-link': OpenLinkInBrowser
+  },
+  data() {
+    return {
+      selectedImageFileName: "Who will be the lucky one?",
+      imageUrl: "/casino.png",
+      folderPath: null,
+      images: [],
+      idx: 0,
+      stop: false,
+      itv: null,
+      startBtnText: "Select an image folder -> ",
+      readyForRoll: false,
+      rolling: false,
+      btnType: "succcess",
+      imgRowStyle: {
+        backgroundImage: null
+      }
+    };
+  },
+  methods: {
+    stopRoll() {
+      this.stop = true;
+      clearInterval(this.itv);
+      this.itv = null;
+    },
+    doStart() {
+      this.stop = false;
+      this.itv = setInterval(() => {
+        this.imageUrl = this.images[this.idx].uri;
+        this.selectedImageFileName = this.images[this.idx].name;
+        if (this.stop) {
+          return;
+        }
+        this.idx = this.idx + 1 >= this.images.length ? 0 : this.idx + 1;
+      }, 50);
+      this.btnType = "danger";
+      this.startBtnText = "Stop";
+    },
+    doStop() {
+      this.stop = true;
+      clearInterval(this.itv);
+      this.itv = null;
+      this.btnType = "success";
+      this.startBtnText = "Start";
+    },
+    startRoll() {
+      if (this.rolling) {
+        this.doStop();
+      } else {
+        this.doStart();
+      }
+      this.rolling = !this.rolling;
+    },
+    arrayBufferToBase64(buffer, callback) {
+      var blob = new Blob([buffer], {
+        type: "application/octet-binary"
+      });
+      var reader = new FileReader();
+      reader.onload = function(evt) {
+        var dataurl = evt.target.result;
+        callback(dataurl.substr(dataurl.indexOf(",") + 1));
+      };
+      reader.readAsDataURL(blob);
+    },
+    convertFile2Images(files) {
+      // [{path, is_dir, name}]
+      if (!files) {
+        return [];
+      }
+
+      const imgs = files.filter(f => {
+        let fname = f.name.toLowerCase();
+        if (
+          fname.endsWith(".jpg") ||
+          fname.endsWith(".jpeg") ||
+          fname.endsWith(".png")
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+      if (!imgs || imgs.length === 1) {
+        alert("no image files or only 1 image file");
+        return [];
+      }
+
+      this.images = [];
+      imgs.forEach(f => {
+        readBinaryFile(f.path)
+          .then(res => {
+            this.arrayBufferToBase64(new Uint8Array(res), b64 => {
+              this.images = this.images.concat({
+                path: f.path,
+                uri: "data:image/png;base64," + b64,
+                name: f.name.substr(0, f.name.lastIndexOf("."))
+              });
+              if (this.images.length === imgs.length) {
+                this.btnType = "success";
+                this.startBtnText = "Start";
+                this.readyForRoll = true;
+                this.imageUrl = this.images[0].uri;
+                this.$message({
+                  duration: 2000,
+                  position: "bottom",
+                  type: "success",
+                  message: `${this.images.length} images read successfully!\r\nYou can now start to pick the lucky one.`
+                });
+              }
+            });
+          })
+          .catch(err => {
+            console.error("cannot read image file");
+            console.error(err);
+          });
+      });
+    },
+    async selectImagefolder() {
+      const dir = await open({
+        directory: true
+      });
+      const files = await readDir(dir);
+      if (!files) {
+        alert("no files");
+        return;
+      }
+      this.reset();
+
+      this.startBtnText = "Reading image files...";
+      this.convertFile2Images(files);
+    },
+    reset() {
+      this.imageUrl = "/casino.png";
+      this.selectedImageFileName = "Who will be the lucky one?";
+      this.imageUrl = null;
+      this.idx = 0;
+      this.images = [];
+      this.rolling = false;
+    },
+    filterImages(files) {
+      if (!files) {
+        return [];
+      }
+      return files.filter(f => {
+        let fname = f.name.toLowerCase();
+        if (
+          fname.endsWith(".jpg") ||
+          fname.endsWith(".jpeg") ||
+          fname.endsWith(".png")
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+    }
+  },
+  mounted() {
+    console.log("mounted");
+  }
+};
+</script>
+
+<style>
+html body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #cdd1d3;
+}
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  background-size: cover;
+}
+#the-img {
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  margin: 1em auto;
+  display: block;
+  border: 2px #ec2d7a dashed;
+}
+#the-img:hover {
+  border: 2px #207f4c dashed;
+}
+.name-row {
+  margin-top: 1em;
+}
+.btn-row {
+  margin-top: 1em;
+}
+.footer-row {
+  font-size: smaller;
+  text-align: left;
+  padding-left: 1em;
+  margin-top: 3em;
+}
+</style>
