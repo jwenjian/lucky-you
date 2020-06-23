@@ -108,9 +108,10 @@ jobs:
       - name: compress (macos only)
         if: matrix.platform == 'macos-latest'
         working-directory: ${{ format('./src-tauri/target/release/{0}', matrix.buildFolder ) }}
-        run: echo ::set-env name=PACKAGE_VERSION::$(node -p "require('./package.json').version")
-        run: cp ${{ format('LuckyYou{0}{1}', matrix.ext, matrix.compressed ) }} ${{ format('LuckyYou_{0}{1}{2}', env.PACKAGE_VERSION, matrix.ext, matrix.compressed ) }}
-        run: tar -czf ${{ format('LuckyYou{0}{1}{2}', env.PACKAGE_VERSION, matrix.ext, matrix.compressed ) }} ${{ format('LuckyYou_{0}{1}', env.PACKAGE_VERSION, matrix.ext ) }}
+        run: |
+          echo ::set-env name=PACKAGE_VERSION::$(node -p "require('./package.json').version")
+          cp ${{ format('LuckyYou{0}{1}', matrix.ext, matrix.compressed ) }} ${{ format('LuckyYou_{0}{1}{2}', env.PACKAGE_VERSION, matrix.ext, matrix.compressed ) }}
+          tar -czf ${{ format('LuckyYou{0}{1}{2}', env.PACKAGE_VERSION, matrix.ext, matrix.compressed ) }} ${{ format('LuckyYou_{0}{1}', env.PACKAGE_VERSION, matrix.ext ) }}
       - name: get version
         run: echo ::set-env name=PACKAGE_VERSION::$(node -p "require('./package.json').version")
       - name: upload release asset
