@@ -72,7 +72,7 @@ jobs:
         include:
           - platform: ubuntu-latest
             buildFolder: bundle/deb
-            ext: _0.1.0_amd64.deb
+            ext: _amd64.deb
             compressed: ''
           - platform: macos-latest
             buildFolder: bundle/osx
@@ -104,7 +104,7 @@ jobs:
         run: yarn build
       - run: cargo install tauri-bundler --force
       - name: build tauri app
-        run: yarn tauri build
+        run: npm run tauri:build
       - name: compress (macos only)
         if: matrix.platform == 'macos-latest'
         working-directory: ${{ format('./src-tauri/target/release/{0}', matrix.buildFolder ) }}
