@@ -1,4 +1,10 @@
 {
+  "build": {
+    "distDir": "../build",
+    "devPath": "http://localhost:3000",
+    "beforeDevCommand": "",
+    "beforeBuildCommand": ""
+  },
   "ctx": {},
   "tauri": {
     "cli": null,
@@ -39,7 +45,7 @@
     "window": {
       "title": "Lucky You",
       "width": 800,
-      "height": 700,
+      "height": 600,
       "resizable": false,
       "fullscreen": false
     },
