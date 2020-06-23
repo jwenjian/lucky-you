@@ -8,31 +8,31 @@ on:
       - '**/package.json'
 
 jobs:
-  check-build:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
+  # check-build:
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 30
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: setup node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - name: install rust stable
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          profile: minimal
-      - name: install webkit2gtk
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y webkit2gtk-4.0
-      - run: yarn
-      - name: build LuckyYou for tauri app
-        run: yarn build
-      - run: cargo install tauri-bundler --force
-      - name: build tauri app
-        run: yarn tauri build
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: setup node
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: 12
+  #     - name: install rust stable
+  #       uses: actions-rs/toolchain@v1
+  #       with:
+  #         toolchain: stable
+  #         profile: minimal
+  #     - name: install webkit2gtk
+  #       run: |
+  #         sudo apt-get update
+  #         sudo apt-get install -y webkit2gtk-4.0
+  #     - run: yarn
+  #     - name: build LuckyYou for tauri app
+  #       run: yarn build
+  #     - run: cargo install tauri-bundler --force
+  #     - name: build tauri app
+  #       run: yarn tauri build
 
   create-release:
     needs: check-build
@@ -99,10 +99,10 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y webkit2gtk-4.0
+      - run: cargo install tauri-bundler --force
       - run: yarn
       - name: build LuckyYou for tauri app
         run: yarn build
-      - run: cargo install tauri-bundler --force
       - name: build tauri app
         run: npm run tauri:build
       - name: compress (macos only)
