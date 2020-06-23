@@ -101,7 +101,7 @@ jobs:
           sudo apt-get install -y webkit2gtk-4.0
       - run: yarn
       - name: build LuckyYou for tauri app
-        run: yarn build
+        run: npm run tauri:build
       - run: cargo install tauri-bundler --force
       - name: build tauri app
         run: npm run tauri:build
@@ -120,7 +120,7 @@ jobs:
           asset_name: ${{ format('LuckyYou{0}{1}', matrix.ext, matrix.compressed ) }}
           asset_content_type: application/zip
       - name: build tauri app in debug mode
-        run: yarn tauri build --debug
+        run: npm run tauri:build
       - name: compress (macos only)
         if: matrix.platform == 'macos-latest'
         working-directory: ${{ format('./src-tauri/target/debug/{0}', matrix.buildFolder ) }}
