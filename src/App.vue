@@ -28,11 +28,14 @@
           Made with ❤️ by
           <a-link url="https://github.com/jwenjian" text="jwenjian"></a-link>
         </p>
-        <div>
+        <span class="copyright">
           Icons made by
           <i>Freepik</i> from
           <u>www.flaticon.com</u>
-        </div>
+        </span>
+        <span class="copyright">Sound made by
+          <i>pierrecartoons1979</i> from
+          <u>freesound.org</u></span>
       </el-col>
     </el-row>
   </div>
@@ -42,6 +45,7 @@
 import { readBinaryFile, readDir } from "tauri/api/fs";
 import { open } from "tauri/api/dialog";
 import OpenLinkInBrowser from "./components/OpenLinkInBrowser";
+import { Howl } from 'howler'
 
 export default {
   name: "App",
@@ -63,6 +67,10 @@ export default {
       btnType: "succcess",
       imgRowStyle: {
         backgroundImage: null
+      },
+      sound: {
+        rolling: null,
+        success: null
       }
     };
   },
@@ -72,7 +80,17 @@ export default {
       clearInterval(this.itv);
       this.itv = null;
     },
+    playRollingSound() {
+      this.sound.rolling.play()
+    },
+    stopRollingSound() {
+      this.sound.rolling.pause()
+    },
+    playSuccessSound() {
+     this.sound.success.play()
+    },
     doStart() {
+      this.playRollingSound();
       this.stop = false;
       this.itv = setInterval(() => {
         this.imageUrl = this.images[this.idx].uri;
@@ -86,8 +104,10 @@ export default {
       this.startBtnText = "Stop";
     },
     doStop() {
+      this.playSuccessSound()
       this.stop = true;
       clearInterval(this.itv);
+      this.stopRollingSound()
       this.itv = null;
       this.btnType = "success";
       this.startBtnText = "Start";
@@ -210,6 +230,13 @@ export default {
   },
   mounted() {
     console.log("mounted");
+    this.sound.rolling = new Howl({
+      src: ['rolling.mp3'],
+      loop: true
+    })
+    this.sound.success = new Howl({
+      src: ['success.mp3']
+    })
   }
 };
 </script>
@@ -257,5 +284,9 @@ html body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.copyright {
+  display: block;
+  font-size: smaller;
 }
 </style>
