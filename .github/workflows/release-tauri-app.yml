@@ -72,15 +72,15 @@ jobs:
         include:
           - platform: ubuntu-latest
             buildFolder: bundle/deb
-            ext: -${{env.PACKAGE_VERSION}}-amd64.deb
+            ext: "-${{env.PACKAGE_VERSION}}-amd64.deb"
             compressed: ''
           - platform: macos-latest
             buildFolder: bundle/osx
-            ext: -${{env.PACKAGE_VERSION}}.app
+            ext: "-${{env.PACKAGE_VERSION}}.app"
             compressed: .tgz
           - platform: windows-latest
             buildFolder: ''
-            ext: -${{env.PACKAGE_VERSION}}.x64.msi
+            ext: "-${{env.PACKAGE_VERSION}}.x64.msi"
             compressed: ''
 
     steps:
