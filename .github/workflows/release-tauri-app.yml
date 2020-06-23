@@ -72,15 +72,15 @@ jobs:
         include:
           - platform: ubuntu-latest
             buildFolder: bundle/deb
-            ext: _amd64.deb
+            ext: -${{PACKAGE_VERSION}}-amd64.deb
             compressed: ''
           - platform: macos-latest
             buildFolder: bundle/osx
-            ext: .app
+            ext: -${{PACKAGE_VERSION}}.app
             compressed: .tgz
           - platform: windows-latest
             buildFolder: ''
-            ext: .x64.msi
+            ext: -${{PACKAGE_VERSION}}.x64.msi
             compressed: ''
 
     steps:
@@ -101,7 +101,7 @@ jobs:
           sudo apt-get install -y webkit2gtk-4.0
       - run: yarn
       - name: build LuckyYou for tauri app
-        run: npm run tauri:build
+        run: yarn build
       - run: cargo install tauri-bundler --force
       - name: build tauri app
         run: npm run tauri:build
