@@ -109,6 +109,8 @@ jobs:
         if: matrix.platform == 'macos-latest'
         working-directory: ${{ format('./src-tauri/target/release/{0}', matrix.buildFolder ) }}
         run: tar -czf ${{ format('LuckyYou{0}{1}', matrix.ext, matrix.compressed ) }} ${{ format('LuckyYou{0}', matrix.ext ) }}
+      - name: get version
+        run: echo ::set-env name=PACKAGE_VERSION::$(node -p "require('./package.json').version")
       - name: upload release asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1.0.2
@@ -116,8 +118,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create-release.outputs.RELEASE_UPLOAD_URL }}
-          asset_path: ${{ format('./src-tauri/target/release/{0}/LuckyYou{1}{2}', matrix.buildFolder, matrix.ext, matrix.compressed ) }}
-          asset_name: ${{ format('LuckyYou{0}{1}', matrix.ext, matrix.compressed ) }}
+          asset_path: ${{ format('./src-tauri/target/release/{0}/LuckyYou{1}{2}{3}', matrix.buildFolder, env.PACKAGE_VERSION, matrix.ext, matrix.compressed ) }}
+          asset_name: ${{ format('LuckyYou{0}{1}{2}', env.PACKAGE_VERSION, matrix.ext, matrix.compressed ) }}
           asset_content_type: application/zip
       - name: build tauri app in debug mode
         run: npm run tauri:build
