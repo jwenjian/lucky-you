@@ -109,7 +109,7 @@ jobs:
         if: matrix.platform == 'macos-latest'
         working-directory: ${{ format('./src-tauri/target/release/{0}', matrix.buildFolder ) }}
         run: |
-          echo ::set-env name=PACKAGE_VERSION::$(node -p "require('./package.json').version")
+          echo ::set-env name=PACKAGE_VERSION::$(node -p "require('../../../../package.json').version")
           cp ${{ format('LuckyYou{0}{1}', matrix.ext, matrix.compressed ) }} ${{ format('LuckyYou_{0}{1}{2}', env.PACKAGE_VERSION, matrix.ext, matrix.compressed ) }}
           tar -czf ${{ format('LuckyYou{0}{1}{2}', env.PACKAGE_VERSION, matrix.ext, matrix.compressed ) }} ${{ format('LuckyYou_{0}{1}', env.PACKAGE_VERSION, matrix.ext ) }}
       - name: get version
@@ -123,20 +123,4 @@ jobs:
           upload_url: ${{ needs.create-release.outputs.RELEASE_UPLOAD_URL }}
           asset_path: ${{ format('./src-tauri/target/release/{0}/LuckyYou_{1}{2}{3}', matrix.buildFolder, env.PACKAGE_VERSION, matrix.ext, matrix.compressed ) }}
           asset_name: ${{ format('LuckyYou_{0}{1}{2}', env.PACKAGE_VERSION, matrix.ext, matrix.compressed ) }}
-          asset_content_type: application/zip
-      - name: build tauri app in debug mode
-        run: npm run tauri:build
-      - name: compress (macos only)
-        if: matrix.platform == 'macos-latest'
-        working-directory: ${{ format('./src-tauri/target/debug/{0}', matrix.buildFolder ) }}
-        run: tar -czf ${{ format('LuckyYou{0}{1}', matrix.ext, matrix.compressed ) }} ${{ format('LuckyYou{0}', matrix.ext ) }}
-      - name: upload release asset with debug mode on
-        id: upload-release-asset-debug-mode
-        uses: actions/upload-release-asset@v1.0.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.create-release.outputs.RELEASE_UPLOAD_URL }}
-          asset_path: ${{ format('./src-tauri/target/debug/{0}/LuckyYou{1}{2}', matrix.buildFolder, matrix.ext, matrix.compressed ) }}
-          asset_name: ${{ format('LuckyYou-debug{0}{1}', matrix.ext, matrix.compressed ) }}
           asset_content_type: application/zip
