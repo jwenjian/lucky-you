@@ -77,7 +77,7 @@ jobs:
           - platform: macos-latest
             buildFolder: bundle/osx
             ext: ".app"
-            compressed: .tgz
+            compressed: ''
           - platform: windows-latest
             buildFolder: ''
             ext: ".x64.msi"
