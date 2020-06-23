@@ -54,7 +54,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ matrix.package.name }}-v${{ env.PACKAGE_VERSION }}
+          tag_name: v${{ env.PACKAGE_VERSION }}
           release_name: "Release LuckyYou app v${{ env.PACKAGE_VERSION }}"
           body: "See the assets to download this version and install."
           draft: true
@@ -68,8 +68,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        package:
-          name: LuckyYou
         platform: [ubuntu-latest, macos-latest, windows-latest]
         include:
           - platform: ubuntu-latest
