@@ -104,7 +104,7 @@ jobs:
       - name: build LuckyYou for tauri app
         run: yarn build
       - name: build tauri app
-        run: ｜
+        run: |
           cargo update
           npm run tauri:build
       - name: get version
