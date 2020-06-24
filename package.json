@@ -2,7 +2,7 @@
   "name": "lucky-you",
   "version": "0.1.10",
   "private": true,
-  "description": "A tauri app to choose lucky you, build - 0112, no compress, no tgz, add version info to dmg file., ignore cargo.lock, fix web-view compile error in windows",
+  "description": "A tauri app to choose lucky you, build - 0112, cargo update",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

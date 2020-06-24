@@ -104,7 +104,9 @@ jobs:
       - name: build LuckyYou for tauri app
         run: yarn build
       - name: build tauri app
-        run: npm run tauri:build
+        run: ｜
+          cargo update
+          npm run tauri:build
       - name: get version
         run: echo ::set-env name=PACKAGE_VERSION::$(node -p "require('./package.json').version")
       - name: add version info for osx files
