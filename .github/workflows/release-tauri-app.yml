@@ -105,7 +105,7 @@ jobs:
         run: yarn build
       - name: build tauri app
         run: |
-          cargo update
+          cd src-tauri && cargo update && cd ../
           npm run tauri:build
       - name: get version
         run: echo ::set-env name=PACKAGE_VERSION::$(node -p "require('./package.json').version")
