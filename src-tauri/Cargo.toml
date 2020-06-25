@@ -1,7 +1,7 @@
 [package]
 name = "LuckyYou"
-version = "0.1.10"
-description = "A Tauri App to choose a lucky man."
+version = "0.2.0"
+description = "A cross platform app to choose lucky you based on tauri"
 authors = [ "jwenjian" ]
 license = ""
 repository = ""
