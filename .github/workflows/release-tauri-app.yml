@@ -116,8 +116,18 @@ jobs:
           mv LuckyYou.dmg LuckyYou_${{ env.PACKAGE_VERSION }}.dmg
       - name: add version info for msi files
         if: matrix.platform == 'windows-latest'
+        run: |
+          $env:PACKAGE_VERSION='$(node -p "require('./package.json').version")'
+          echo ${{ env.PACKAGE_VERSION }}
+          dir
+      - name: add version info for msi files
+        if: matrix.platform == 'windows-latest'
         working-directory: ${{ format('./src-tauri/target/release/{0}', matrix.buildFolder ) }}
         run: |
+          $env:PACKAGE_VERSION='$(node -p "require('./package.json').version")'
+          echo ${{ env.PACKAGE_VERSION }}
+          dir
+          ren LuckyYou.x64.msi LuckyYou_${{ env.PACKAGE_VERSION }}.x64.msi
           mv LuckyYou.x64.msi LuckyYou_${{ env.PACKAGE_VERSION }}.x64.msi
       - name: upload release asset
         id: upload-release-asset
