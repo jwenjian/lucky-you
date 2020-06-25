@@ -2,7 +2,7 @@
   "name": "lucky-you",
   "version": "0.1.10",
   "private": true,
-  "description": "A tauri app to choose lucky you, 0.6.2 tauri",
+  "description": "A tauri app to choose lucky you, 0.6.2 tauri, fix windows file name",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
