@@ -8,7 +8,22 @@ on:
       - '**/package.json'
 
 jobs:
+  check-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: get version and set env
+        run: |
+          dir
+          $env:PACKAGE_VERSION='$(node -p "require('package.json').version")'
+          echo ${{ env.PACKAGE_VERSION }}
+          dir
   check-build:
+    needs: check-windows
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -117,7 +132,8 @@ jobs:
       - name: add version info for msi files
         if: matrix.platform == 'windows-latest'
         run: |
-          $env:PACKAGE_VERSION='$(node -p "require('./package.json').version")'
+          dir
+          $env:PACKAGE_VERSION='$(node -p "require('package.json').version")'
           echo ${{ env.PACKAGE_VERSION }}
           dir
       - name: add version info for msi files
