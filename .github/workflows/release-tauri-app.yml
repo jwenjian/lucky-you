@@ -20,7 +20,7 @@ jobs:
         run: |
           dir
           $env:PACKAGE_VERSION=$(node -p "require('.\\package.json').version")
-          "echo ${{ env.PACKAGE_VERSION }}"
+          echo %PACKAGE_VERSION%
           dir
   check-build:
     needs: check-windows
@@ -133,9 +133,7 @@ jobs:
         if: matrix.platform == 'windows-latest'
         run: |
           dir
-          $env:PACKAGE_VERSION='$(node -p "require('package.json').version")'
-          echo ${{ env.PACKAGE_VERSION }}
-          dir
+          $env:PACKAGE_VERSION=$(node -p "require('.\\package.json').version")
       - name: add version info for msi files
         if: matrix.platform == 'windows-latest'
         working-directory: ${{ format('./src-tauri/target/release/{0}', matrix.buildFolder ) }}
