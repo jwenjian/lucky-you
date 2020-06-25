@@ -19,7 +19,7 @@ jobs:
       - name: get version and set env
         run: |
           dir
-          $env:PACKAGE_VERSION='$(node -p "require('package.json').version")'
+          $env:PACKAGE_VERSION='$(node -p "require('.\\package.json').version")'
           echo ${{ env.PACKAGE_VERSION }}
           dir
   check-build:
