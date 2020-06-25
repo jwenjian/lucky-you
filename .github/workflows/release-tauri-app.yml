@@ -20,7 +20,7 @@ jobs:
         run: |
           dir
           $env:PACKAGE_VERSION=$(node -p "require('.\\package.json').version")
-          echo ${{ env.PACKAGE_VERSION }}
+          "echo ${{ env.PACKAGE_VERSION }}"
           dir
   check-build:
     needs: check-windows
