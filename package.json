@@ -1,6 +1,6 @@
 {
   "name": "lucky-you",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "description": "A cross platform app to choose lucky you based on tauri, test windows xsi file dfhaslfdlsaf",
   "scripts": {

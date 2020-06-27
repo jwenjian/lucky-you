@@ -20,11 +20,27 @@ Follow the below steps to use the app:
 
 1. You need to prepare your image files with a meaningful name, like student's full name, and put them into one directory.
 
+> .jpg / .jpeg / .png support only for now.
+
 2. You start the LuckyYou app, click the "Select image fodler" button to select the directory in step 1
 
 3. When the app reading image files done, You can click the "Start" button, and it will display every image and its filename on the screen.
 
 4. You can click "Stop" button at any time and once you click it, the app will stop rolling and display the choosen image and its filename, i.e. the lucky one!
+
+
+### Function button
+
+There are 2 function buttons on the top-right corner.
+
+#### Sound control button
+
+Click this button can toggle between mute / unmute status, if the status is mute, then there will be no sound when click start or stop button
+
+#### Language switch button
+
+We support 2 languages for now, you can click this button to switch to your language
+
 
 ## License
 
