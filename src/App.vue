@@ -9,7 +9,7 @@
           <span class="toolbar-btn-status">{{ soundBtnStatus }}</span>
         </div>
         <div class="toolbar-btn-wrapper">
-          <el-dropdown  trigger="click" class="toolbar-btn" @command="onLangChange">
+          <el-dropdown trigger="click" class="toolbar-btn" @command="onLangChange">
             <el-button :disabled="rolling" class="toolbar-btn" circle>
               <i class="fas fa-globe"></i>
             </el-button>
@@ -37,7 +37,11 @@
     <el-row justify="center" class="btn-row">
       <el-col :span="12" :offset="6">
         <el-button :disabled="!readyForRoll" :type="btnType" @click="startRoll">{{ startBtnText }}</el-button>
-        <el-button :disabled="rolling" type="text" @click="selectImagefolder">{{ $t('luckyYou.button.selectImageFolder') }}</el-button>
+        <el-button
+          :disabled="rolling"
+          type="text"
+          @click="selectImagefolder"
+        >{{ $t('luckyYou.button.selectImageFolder') }}</el-button>
       </el-col>
       <el-col :span="4">
         <div class="item"></div>
@@ -81,7 +85,7 @@ export default {
       idx: 0,
       stop: false,
       itv: null,
-      startBtnText: "Select an image folder -> ",
+      startBtnText: this.$t("luckyYou.button.start"),
       readyForRoll: false,
       rolling: false,
       btnType: "succcess",
@@ -101,16 +105,34 @@ export default {
       return this.isPlaySound ? "fas fa-volume-up" : "fas fa-volume-mute";
     },
     soundBtnStatus() {
-      return this.isPlaySound ? this.$t("luckyYou.text.unmuted") : this.$t("luckyYou.text.muted");
+      return this.isPlaySound
+        ? this.$t("luckyYou.text.unmuted")
+        : this.$t("luckyYou.text.muted");
     }
   },
   methods: {
     onLangChange(lang) {
       this.$i18n.locale = lang;
+      this._changeDynamicTextLang();
+    },
+    _changeDynamicTextLang() {
+      // start button, ugly implementation, only start button text need to do this currently
+      this.startBtnText = this.$t("luckyYou.button.start");
+      // if the tips is default tip, then set the default tip in current lang
+      if (
+        this.selectedImageFileName ===
+          this.$t("luckyYou.text.defaultTips", "zh") ||
+        this.selectedImageFileName ===
+          this.$t("luckyYou.text.defaultTips", "en")
+      ) {
+        this.selectedImageFileName = this.$t("luckyYou.text.defaultTips");
+      }
     },
     toggleSound() {
       this.isPlaySound = !this.isPlaySound;
-      let msg = this.isPlaySound ? this.$t("luckyYou.text.unmuted") : this.$t("luckyYou.text.muted");
+      let msg = this.isPlaySound
+        ? this.$t("luckyYou.text.unmuted")
+        : this.$t("luckyYou.text.muted");
       this.$message({
         duration: 1000,
         type: "info",
