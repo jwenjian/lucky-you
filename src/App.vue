@@ -26,7 +26,7 @@
       <el-col :span="12">
         <p>
           Made with ❤️ by
-          <a-link url="https://github.com/jwenjian" text="jwenjian"></a-link>
+          <a href="https://github.com/jwenjian" target="_blank">jwenjian</a>
         </p>
         <span class="copyright">
           Icons made by
@@ -44,14 +44,10 @@
 <script>
 import { readBinaryFile, readDir } from "tauri/api/fs";
 import { open } from "tauri/api/dialog";
-import OpenLinkInBrowser from "./components/OpenLinkInBrowser";
 import { Howl } from 'howler'
 
 export default {
   name: "App",
-  components: {
-    "a-link": OpenLinkInBrowser
-  },
   data() {
     return {
       selectedImageFileName: "Who will be THE one?",
