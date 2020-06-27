@@ -1,5 +1,10 @@
 <template>
   <div id="app">
+    <el-row justify="space-between" class="toobar-row">
+      <el-col :span="6" :offset="18">
+        <el-button class="toobar-btn" :icon="soundBtnIcon" circle @click="toggleSound"></el-button>
+      </el-col>
+    </el-row>
     <el-row justify="space-between" class="img-row">
       <el-col :span="12" :offset="6">
         <img id="the-img" :src="imageUrl" />
@@ -33,9 +38,11 @@
           <i>Freepik</i> from
           <u>www.flaticon.com</u>
         </span>
-        <span class="copyright">Sound made by
+        <span class="copyright">
+          Sound made by
           <i>pierrecartoons1979</i> from
-          <u>freesound.org</u></span>
+          <u>freesound.org</u>
+        </span>
       </el-col>
     </el-row>
   </div>
@@ -44,7 +51,7 @@
 <script>
 import { readBinaryFile, readDir } from "tauri/api/fs";
 import { open } from "tauri/api/dialog";
-import { Howl } from 'howler'
+import { Howl } from "howler";
 
 export default {
   name: "App",
@@ -67,26 +74,43 @@ export default {
       sound: {
         rolling: null,
         success: null
-      }
+      },
+      isPlaySound: true
     };
   },
+  computed: {
+    soundBtnIcon() {
+      return this.isPlaySound ? "el-icon-close-notification" : "el-icon-bell";
+    }
+  },
   methods: {
+    toggleSound() {
+      this.isPlaySound = !this.isPlaySound;
+      let msg = this.isPlaySound ? "Unmuted" : "Muted";
+      this.$message({
+        duration: 1000,
+        type: "info",
+        message: msg
+      });
+    },
     stopRoll() {
       this.stop = true;
       clearInterval(this.itv);
       this.itv = null;
     },
     playRollingSound() {
-      this.sound.rolling.play()
+      this.sound.rolling.play();
     },
     stopRollingSound() {
-      this.sound.rolling.pause()
+      this.sound.rolling.pause();
     },
     playSuccessSound() {
-     this.sound.success.play()
+      this.sound.success.play();
     },
     doStart() {
-      this.playRollingSound();
+      if (this.isPlaySound) {
+        this.playRollingSound();
+      }
       this.stop = false;
       this.itv = setInterval(() => {
         this.imageUrl = this.images[this.idx].uri;
@@ -100,10 +124,14 @@ export default {
       this.startBtnText = "Stop";
     },
     doStop() {
-      this.playSuccessSound()
+      if (this.isPlaySound) {
+        this.playSuccessSound();
+      }
       this.stop = true;
       clearInterval(this.itv);
-      this.stopRollingSound()
+      if (this.isPlaySound) {
+        this.stopRollingSound();
+      }
       this.itv = null;
       this.btnType = "success";
       this.startBtnText = "Start";
@@ -168,7 +196,6 @@ export default {
                 this.imageUrl = "/casino.png";
                 this.$message({
                   duration: 1000,
-                  position: "bottom",
                   type: "success",
                   message: `${this.images.length} images read successfully!\r\nYou can now start to pick the lucky one.`
                 });
@@ -192,8 +219,8 @@ export default {
       }
       this.reset();
 
-      this.imageUrl = '/casino.png';
-      this.btnType = '';
+      this.imageUrl = "/casino.png";
+      this.btnType = "";
       this.readyForRoll = false;
       this.startBtnText = "Reading image files...";
       this.convertFile2Images(files);
@@ -227,12 +254,12 @@ export default {
   mounted() {
     console.log("mounted");
     this.sound.rolling = new Howl({
-      src: ['rolling.mp3'],
+      src: ["rolling.mp3"],
       loop: true
-    })
+    });
     this.sound.success = new Howl({
-      src: ['success.mp3']
-    })
+      src: ["success.mp3"]
+    });
   }
 };
 </script>
@@ -284,5 +311,8 @@ html body {
 .copyright {
   display: block;
   font-size: smaller;
+}
+.toobar-row {
+  margin-top: 1em;
 }
 </style>
