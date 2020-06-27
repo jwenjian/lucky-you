@@ -111,6 +111,46 @@ export default {
     }
   },
   methods: {
+    shortenImageName(fullImageName) {
+      let orig = fullImageName;
+      if ("Windows" === this.getOS()) {
+        if (fullImageName.indexOf("/") > 0) {
+          orig = fullImageName.substr(
+            fullImageName.lastIndexOf("/") + 1,
+            fullImageName.length
+          );
+        }
+        if (fullImageName.indexOf("\\") > 0) {
+          orig = fullImageName.substr(
+            fullImageName.lastIndexOf("\\") + 1,
+            fullImageName.length
+          );
+        }
+      }
+      return orig.substr(0, orig.lastIndexOf("."));
+    },
+    getOS() {
+      var userAgent = window.navigator.userAgent,
+        platform = window.navigator.platform,
+        macosPlatforms = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"],
+        windowsPlatforms = ["Win32", "Win64", "Windows", "WinCE"],
+        iosPlatforms = ["iPhone", "iPad", "iPod"],
+        os = null;
+
+      if (macosPlatforms.indexOf(platform) !== -1) {
+        os = "Mac OS";
+      } else if (iosPlatforms.indexOf(platform) !== -1) {
+        os = "iOS";
+      } else if (windowsPlatforms.indexOf(platform) !== -1) {
+        os = "Windows";
+      } else if (/Android/.test(userAgent)) {
+        os = "Android";
+      } else if (!os && /Linux/.test(platform)) {
+        os = "Linux";
+      }
+
+      return os;
+    },
     onLangChange(lang) {
       this.$i18n.locale = lang;
       this._changeDynamicTextLang();
@@ -237,7 +277,7 @@ export default {
               this.images = this.images.concat({
                 path: f.path,
                 uri: "data:image/png;base64," + b64,
-                name: f.name.substr(0, f.name.lastIndexOf("."))
+                name: this.shortenImageName(f.name)
               });
               if (this.images.length === imgs.length) {
                 this.btnType = "success";
