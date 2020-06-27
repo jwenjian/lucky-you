@@ -4,6 +4,10 @@
 
 LuckyYou is a simple app build on [tauri](https://github.com/tauri-apps/tauri) framework to provide a crossplatform application to do a lucky draw or make a roll call on your class or similar use cases.
 
+## Screenshots
+
+![截屏2020-06-27 下午5.20.17.png](https://i.loli.net/2020/06/27/gyBWUFu1kCqQwEV.png)
+
 ## Install
 
 Firstly you need to download from release page according to your platform, I will always release 3 files per version:
@@ -41,6 +45,13 @@ Click this button can toggle between mute / unmute status, if the status is mute
 
 We support 2 languages for now, you can click this button to switch to your language
 
+## Note
+
+1. This app is not support update directly for now, so if you have an old version, please unintall it before you install a new version
+
+2. Your image file better be small(like less than 1Mb)，otherwise it will consume more memory
+
+3. Your image file name better be short(like less than 10 words), otherwise it may be wrapped and replaced with `...`
 
 ## License
 
