@@ -1,8 +1,25 @@
 <template>
   <div id="app">
-    <el-row justify="space-between" class="toobar-row">
-      <el-col :span="6" :offset="18">
-        <el-button class="toobar-btn" :icon="soundBtnIcon" circle @click="toggleSound"></el-button>
+    <el-row justify="space-between" class="toolbar-row">
+      <el-col :span="6" :offset="18" class="toolbar-section">
+        <div class="toolbar-btn-wrapper">
+          <el-button class="toolbar-btn" circle @click="toggleSound">
+            <i :class="soundBtnIcon"></i>
+          </el-button>
+          <span class="toolbar-btn-status">{{ soundBtnStatus }}</span>
+        </div>
+        <div class="toolbar-btn-wrapper">
+          <el-dropdown trigger="click" class="toolbar-btn" @command="onLangChange">
+            <el-button class="toolbar-btn" circle>
+              <i class="fas fa-globe"></i>
+            </el-button>
+            <span class="toolbar-btn-status">{{ selectedLang }}</span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="en">🇬🇧</el-dropdown-item>
+              <el-dropdown-item command="zh">🇨🇳</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
       </el-col>
     </el-row>
     <el-row justify="space-between" class="img-row">
@@ -75,15 +92,22 @@ export default {
         rolling: null,
         success: null
       },
-      isPlaySound: true
+      isPlaySound: true,
+      selectedLang: "En"
     };
   },
   computed: {
     soundBtnIcon() {
-      return this.isPlaySound ? "el-icon-close-notification" : "el-icon-bell";
+      return this.isPlaySound ? "fas fa-volume-up" : "fas fa-volume-mute";
+    },
+    soundBtnStatus() {
+      return this.isPlaySound ? "Unmuted" : "Muted";
     }
   },
   methods: {
+    onLangChange(e) {
+      console.log(e);
+    },
     toggleSound() {
       this.isPlaySound = !this.isPlaySound;
       let msg = this.isPlaySound ? "Unmuted" : "Muted";
@@ -283,7 +307,7 @@ html body {
   width: 300px;
   height: 300px;
   overflow: hidden;
-  margin: 1em auto;
+  margin: 0.5em auto;
   display: block;
   border: 2px #ec2d7a dashed;
 }
@@ -312,7 +336,24 @@ html body {
   display: block;
   font-size: smaller;
 }
-.toobar-row {
-  margin-top: 1em;
+.toolbar-row {
+  margin-top: 0.5em;
+}
+.toolbar-btn {
+  margin-left: 0.5em;
+}
+.toolbar-btn-status {
+  display: block;
+  font-size: x-small;
+  color: var(--primary);
+}
+.toolbar-section {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 1em;
+}
+.toolbar-btn-wrapper {
+  margin-left: 0;
+  align-content: flex-end;
 }
 </style>
