@@ -7,12 +7,19 @@
     "button": {
       "selectImageFolder": "选择图片文件夹",
       "start": "开始",
-      "stop": "停止"
+      "stop": "停止",
+      "readingImage": "图片读取中..."
     },
     "text": {
       "muted": "声音:关",
       "unmuted": "声音:开",
       "defaultTips": "幸运之子会是谁呢？"
+    },
+    "message": {
+      "noImage": "未找到图片文件",
+      "failedToReadImage": "读取图片失败,请使用 jpg 或 png 格式",
+      "readDone": "已成功读取 {0} 个图片，你现在可以点击开始按钮啦~",
+      "commonError": "出错啦 :("
     }
   }
 }

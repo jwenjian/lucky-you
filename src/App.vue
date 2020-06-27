@@ -220,8 +220,12 @@ export default {
         }
       });
 
-      if (!imgs || imgs.length === 1) {
-        alert("no image files or only 1 image file");
+      if (imgs === null || imgs.length <= 1) {
+        this.startBtnText = this.$t("luckyYou.button.start");
+        this.$message({
+          type: "error",
+          message: this.$t("luckyYou.message.noImage")
+        });
         return [];
       }
 
@@ -243,14 +247,19 @@ export default {
                 this.$message({
                   duration: 1000,
                   type: "success",
-                  message: `${this.images.length} images read successfully!\r\nYou can now start to pick the lucky one.`
+                  message: this.$t("luckyYou.message.readDone").format(
+                    this.images.length
+                  )
                 });
               }
             });
           })
           .catch(err => {
-            console.error("cannot read image file");
             console.error(err);
+            this.$message({
+              type: "error",
+              message: this.$t("luckyYou.message.commonError")
+            });
           });
       });
     },
@@ -260,7 +269,10 @@ export default {
       });
       const files = await readDir(dir);
       if (!files) {
-        alert("no files");
+        this.$message({
+          type: "error",
+          message: this.$t("luckyYou.message.noImage")
+        });
         return;
       }
       this.reset();
@@ -268,7 +280,7 @@ export default {
       this.imageUrl = "/casino.png";
       this.btnType = "";
       this.readyForRoll = false;
-      this.startBtnText = "Reading image files...";
+      this.startBtnText = this.$t("luckyYou.button.readingImage");
       this.convertFile2Images(files);
     },
     reset() {
@@ -298,7 +310,6 @@ export default {
     }
   },
   mounted() {
-    console.log("mounted");
     this.sound.rolling = new Howl({
       src: ["rolling.mp3"],
       loop: true

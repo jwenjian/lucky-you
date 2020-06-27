@@ -7,12 +7,19 @@
     "button": {
       "selectImageFolder": "Select image folder",
       "start": "Start",
-      "stop": "Stop"
+      "stop": "Stop",
+      "readingImage": "Reading image..."
     },
     "text": {
       "muted": "Muted",
       "unmuted": "Unmuted",
       "defaultTips": "Who will be THE one?"
+    },
+    "message": {
+      "noImage": "Image file not found",
+      "failedToReadImage": "Failed to read image file, please use .jpg or .png format",
+      "readDone": "{0} image files read successfully, You can now click Start button~",
+      "commonError": "Error happened :("
     }
   }
 }
