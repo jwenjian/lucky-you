@@ -1,0 +1,18 @@
+{
+  "locale": {
+    "name": "中文"
+  },
+  "luckyYou": {
+    "name": "Lucky You",
+    "button": {
+      "selectImageFolder": "选择图片文件夹",
+      "start": "开始",
+      "stop": "停止"
+    },
+    "text": {
+      "muted": "声音:关",
+      "unmuted": "声音:开",
+      "defaultTips": "幸运之子会是谁呢？"
+    }
+  }
+}

@@ -3,17 +3,17 @@
     <el-row justify="space-between" class="toolbar-row">
       <el-col :span="6" :offset="18" class="toolbar-section">
         <div class="toolbar-btn-wrapper">
-          <el-button class="toolbar-btn" circle @click="toggleSound">
+          <el-button :disabled="rolling" class="toolbar-btn" circle @click="toggleSound">
             <i :class="soundBtnIcon"></i>
           </el-button>
           <span class="toolbar-btn-status">{{ soundBtnStatus }}</span>
         </div>
         <div class="toolbar-btn-wrapper">
-          <el-dropdown trigger="click" class="toolbar-btn" @command="onLangChange">
-            <el-button class="toolbar-btn" circle>
+          <el-dropdown  trigger="click" class="toolbar-btn" @command="onLangChange">
+            <el-button :disabled="rolling" class="toolbar-btn" circle>
               <i class="fas fa-globe"></i>
             </el-button>
-            <span class="toolbar-btn-status">{{ selectedLang }}</span>
+            <span class="toolbar-btn-status">{{ $t("locale.name") }}</span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="en">🇬🇧</el-dropdown-item>
               <el-dropdown-item command="zh">🇨🇳</el-dropdown-item>
@@ -37,7 +37,7 @@
     <el-row justify="center" class="btn-row">
       <el-col :span="12" :offset="6">
         <el-button :disabled="!readyForRoll" :type="btnType" @click="startRoll">{{ startBtnText }}</el-button>
-        <el-button :disabled="rolling" type="text" @click="selectImagefolder">Select image folder...</el-button>
+        <el-button :disabled="rolling" type="text" @click="selectImagefolder">{{ $t('luckyYou.button.selectImageFolder') }}</el-button>
       </el-col>
       <el-col :span="4">
         <div class="item"></div>
@@ -74,7 +74,7 @@ export default {
   name: "App",
   data() {
     return {
-      selectedImageFileName: "Who will be THE one?",
+      selectedImageFileName: this.$t("luckyYou.text.defaultTips"),
       imageUrl: "/casino.png",
       folderPath: null,
       images: [],
@@ -101,16 +101,16 @@ export default {
       return this.isPlaySound ? "fas fa-volume-up" : "fas fa-volume-mute";
     },
     soundBtnStatus() {
-      return this.isPlaySound ? "Unmuted" : "Muted";
+      return this.isPlaySound ? this.$t("luckyYou.text.unmuted") : this.$t("luckyYou.text.muted");
     }
   },
   methods: {
-    onLangChange(e) {
-      console.log(e);
+    onLangChange(lang) {
+      this.$i18n.locale = lang;
     },
     toggleSound() {
       this.isPlaySound = !this.isPlaySound;
-      let msg = this.isPlaySound ? "Unmuted" : "Muted";
+      let msg = this.isPlaySound ? this.$t("luckyYou.text.unmuted") : this.$t("luckyYou.text.muted");
       this.$message({
         duration: 1000,
         type: "info",
@@ -145,7 +145,7 @@ export default {
         this.idx = this.idx + 1 >= this.images.length ? 0 : this.idx + 1;
       }, 50);
       this.btnType = "danger";
-      this.startBtnText = "Stop";
+      this.startBtnText = this.$t("luckyYou.button.stop");
     },
     doStop() {
       if (this.isPlaySound) {
@@ -158,7 +158,7 @@ export default {
       }
       this.itv = null;
       this.btnType = "success";
-      this.startBtnText = "Start";
+      this.startBtnText = this.$t("luckyYou.button.start");
     },
     startRoll() {
       if (this.rolling) {
@@ -215,7 +215,7 @@ export default {
               });
               if (this.images.length === imgs.length) {
                 this.btnType = "success";
-                this.startBtnText = "Start";
+                this.startBtnText = this.$t("luckyYou.button.start");
                 this.readyForRoll = true;
                 this.imageUrl = "/casino.png";
                 this.$message({
@@ -251,7 +251,7 @@ export default {
     },
     reset() {
       this.imageUrl = "/casino.png";
-      this.selectedImageFileName = "Who will be THE one?";
+      this.selectedImageFileName = this.$t("luckyYou.text.defaultTips");
       this.imageUrl = null;
       this.idx = 0;
       this.images = [];

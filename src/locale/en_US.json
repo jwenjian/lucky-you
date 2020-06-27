@@ -1,0 +1,18 @@
+{
+  "locale": {
+    "name": "English"
+  },
+  "luckyYou": {
+    "name": "Lucky You",
+    "button": {
+      "selectImageFolder": "Select image folder",
+      "start": "Start",
+      "stop": "Stop"
+    },
+    "text": {
+      "muted": "Muted",
+      "unmuted": "Unmuted",
+      "defaultTips": "Who will be THE one?"
+    }
+  }
+}
