@@ -6,7 +6,7 @@ LuckyYou is a simple app build on [tauri](https://github.com/tauri-apps/tauri) f
 
 ## Screenshots
 
-![截屏2020-06-27 下午5.20.17.png](https://i.loli.net/2020/06/27/gyBWUFu1kCqQwEV.png)
+![截屏2020-06-28 下午12.44.23.png](https://i.loli.net/2020/06/28/yfMEjJzgWKcn79L.png)
 
 ## Install
 
@@ -53,6 +53,20 @@ We support 2 languages for now, you can click this button to switch to your lang
 
 3. Your image file name better be short(like less than 10 words), otherwise it may be wrapped and replaced with `...`
 
+## Donation
+
+Thanks for your donation, your donation will encourege me to add more feature and fix bugs if has any
+
+### Wechat Pay
+
+![](public/wechat.png)
+
+### Paypal
+
+[jwenjian@paypal.me](https://paypal.me/jwenjian/1)
+
 ## License
 
 CC0-1.0, Non-comercial
+
+> Forked repo plese do not remove or change the donation info, be gentleman.

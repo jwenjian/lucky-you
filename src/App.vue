@@ -9,7 +9,7 @@
           <span class="toolbar-btn-status">{{ soundBtnStatus }}</span>
         </div>
         <div class="toolbar-btn-wrapper">
-          <el-dropdown trigger="click" class="toolbar-btn" @command="onLangChange">
+          <el-dropdown trigger="click" @command="onLangChange">
             <el-button :disabled="rolling" class="toolbar-btn" circle>
               <i class="fas fa-globe"></i>
             </el-button>
@@ -19,6 +19,12 @@
               <el-dropdown-item command="zh">🇨🇳</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
+        </div>
+        <div class="toolbar-btn-wrapper">
+          <el-button class="toolbar-btn" circle @click="showDonateDialog">
+            <i class="fas fa-donate"></i>
+          </el-button>
+          <span class="toolbar-btn-status">{{ $t("luckyYou.button.donate") }}</span>
         </div>
       </el-col>
     </el-row>
@@ -66,6 +72,7 @@
         </span>
       </el-col>
     </el-row>
+    <donate-dialog ref="donateDialog"></donate-dialog>
   </div>
 </template>
 
@@ -73,9 +80,13 @@
 import { readBinaryFile, readDir } from "tauri/api/fs";
 import { open } from "tauri/api/dialog";
 import { Howl } from "howler";
+import DonateDialog from "./components/DonateDialog";
 
 export default {
   name: "App",
+  components: {
+    "donate-dialog": DonateDialog
+  },
   data() {
     return {
       selectedImageFileName: this.$t("luckyYou.text.defaultTips"),
@@ -97,7 +108,7 @@ export default {
         success: null
       },
       isPlaySound: true,
-      selectedLang: "En"
+      donateDialogVisible: false
     };
   },
   computed: {
@@ -111,6 +122,9 @@ export default {
     }
   },
   methods: {
+    showDonateDialog() {
+      this.$refs["donateDialog"] && this.$refs["donateDialog"].showDialog();
+    },
     shortenImageName(fullImageName) {
       let orig = fullImageName;
       if ("Windows" === this.getOS()) {
@@ -368,7 +382,7 @@ html body {
   height: 100%;
   background-color: white;
   background-size: cover;
-  background-image: url('/bg.png');
+  background-image: url("/bg.png");
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -419,7 +433,8 @@ html body {
 .toolbar-btn-status {
   display: block;
   font-size: x-small;
-  color: var(--primary);
+  font-weight: bold;
+  color: #606266;
 }
 .toolbar-section {
   display: flex;
@@ -427,7 +442,7 @@ html body {
   padding-right: 1em;
 }
 .toolbar-btn-wrapper {
-  margin-left: 0;
+  margin-left: 0.5em;
   align-content: flex-end;
 }
 </style>

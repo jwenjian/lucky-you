@@ -8,18 +8,27 @@
       "selectImageFolder": "Select image folder",
       "start": "Start",
       "stop": "Stop",
-      "readingImage": "Reading image..."
+      "readingImage": "Reading image...",
+      "donate": "Donate",
+      "nextTime": "Will do in next time",
+      "donated": "I donated!"
     },
     "text": {
       "muted": "Muted",
       "unmuted": "Unmuted",
-      "defaultTips": "Who will be THE one?"
+      "defaultTips": "Who will be THE one?",
+      "donateTips": "Thanks for you donation!",
+      "wechat": "WeChat Pay",
+      "paypal": "Paypal"
     },
     "message": {
       "noImage": "Image file not found",
       "failedToReadImage": "Failed to read image file, please use .jpg or .png format",
       "readDone": "{0} image files read successfully, You can now click Start button~",
-      "commonError": "Error happened :("
+      "commonError": "Error happened :(",
+      "nextTime": "Yes, you said next time.",
+      "donatedTipsTitle": "Thanks for your donation!",
+      "donatedTipsMessage": "I'm sure this is not a miss-click. Please send your donation screenshots to my email: wenjian.jiang@foxmail.com to let me know you and thank you！"
     }
   }
 }

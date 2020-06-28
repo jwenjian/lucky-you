@@ -8,18 +8,27 @@
       "selectImageFolder": "选择图片文件夹",
       "start": "开始",
       "stop": "停止",
-      "readingImage": "图片读取中..."
+      "readingImage": "图片读取中...",
+      "donate": "捐赠",
+      "nextTime": "下次一定",
+      "donated": "我已捐赠"
     },
     "text": {
       "muted": "声音:关",
       "unmuted": "声音:开",
-      "defaultTips": "幸运之子会是谁呢？"
+      "defaultTips": "幸运之子会是谁呢？",
+      "donateTips": "感谢你的捐赠!",
+      "wechat": "微信",
+      "paypal": "贝宝"
     },
     "message": {
       "noImage": "未找到图片文件",
       "failedToReadImage": "读取图片失败,请使用 jpg 或 png 格式",
       "readDone": "已成功读取 {0} 个图片，你现在可以点击开始按钮啦~",
-      "commonError": "出错啦 :("
+      "commonError": "出错啦 :(",
+      "nextTime": "下次，一定",
+      "donatedTipsTitle": "感谢你的捐赠!",
+      "donatedTipsMessage": "我想你应该不是点错了按钮了。请将你捐赠的截图发到我的邮箱：wenjian.jiang@foxmail.com 以便我记录和感谢！"
     }
   }
 }

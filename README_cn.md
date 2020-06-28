@@ -4,7 +4,7 @@ LuckyYou 是一个基于 [tauri](https://github.com/tauri-apps/tauri) 框架开�
 
 ## 截图
 
-![截屏2020-06-27 下午5.20.25.png](https://i.loli.net/2020/06/27/PYe9TEScaAwu61m.png)
+![截屏2020-06-28 下午12.44.33.png](https://i.loli.net/2020/06/28/ueOEUQGq1HgbnmL.png)
 
 ## 安装
 
@@ -50,6 +50,22 @@ LuckyYou 是一个基于 [tauri](https://github.com/tauri-apps/tauri) 框架开�
 
 3. 你的图片文件名不宜过长，否则可能会展示不全，以 10 字以内为宜
 
+
+## 捐赠
+
+感谢你的捐赠，你的捐赠会鼓励我添加更多新功能以及修复可能有的 bug
+
+### 微信支付
+
+![](public/wechat.png)
+
+### 贝宝支付
+
+[jwenjian@paypal.me](https://paypal.me/jwenjian/1)
+
+
 ## 开源协议
 
 CC0-1.0, 署名，非商业。
+
+> Forked 的项目请不要删除或修改捐赠信息，尊重劳动成果，感谢。
