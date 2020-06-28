@@ -366,15 +366,16 @@ html body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: #cdd1d3;
+  background-color: white;
+  background-size: cover;
+  background-image: url('/bg.png');
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  background-size: cover;
+  color: black;
 }
 #the-img {
   width: 300px;
