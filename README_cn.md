@@ -50,6 +50,12 @@ LuckyYou 是一个基于 [tauri](https://github.com/tauri-apps/tauri) 框架开�
 
 3. 你的图片文件名不宜过长，否则可能会展示不全，以 10 字以内为宜
 
+### 已知问题
+
+这里记录一些已知的问题：
+
+1. 无法在 Win7 企业版上打开 App，报错信息："Entry Point Not Found in ole32.dll"
+
 
 ## 捐赠
 

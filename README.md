@@ -53,6 +53,12 @@ We support 2 languages for now, you can click this button to switch to your lang
 
 3. Your image file name better be short(like less than 10 words), otherwise it may be wrapped and replaced with `...`
 
+### Known Issues 
+
+Here are some known issues that need to be fixed:
+
+1. Cannot start app on Win7 Enterprise version with this error: "Entry Point Not Found in ole32.dll"
+
 ## Donation
 
 Thanks for your donation, your donation will encourege me to add more feature and fix bugs if has any
