@@ -1,9 +1,9 @@
 [package]
 name = "LuckyYou"
-version = "1.0.1"
+version = "1.1.0"
 description = "A cross platform app to choose lucky you based on tauri"
 authors = [ "Wenjian Jiang" ]
-license = "CC0-1.0"
+license = "CC BY-NC-ND 3.0"
 repository = "https://github.com/jwenjian/lucky-you"
 default-run = "LuckyYou"
 edition = "2018"
