@@ -2,7 +2,7 @@
 name = "LuckyYou"
 version = "1.0.1"
 description = "A cross platform app to choose lucky you based on tauri"
-authors = [ "jwenjian" ]
+authors = [ "Wenjian Jiang" ]
 license = "CC0-1.0"
 repository = "https://github.com/jwenjian/lucky-you"
 default-run = "LuckyYou"
