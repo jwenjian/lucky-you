@@ -11,7 +11,10 @@
       "readingImage": "Reading image...",
       "donate": "Donate",
       "nextTime": "Will do in next time",
-      "donated": "I donated!"
+      "donated": "I donated!",
+      "confirm": "Confirm",
+      "settings": "Settings",
+      "cancel": "Cancel"
     },
     "text": {
       "muted": "Muted",
@@ -19,7 +22,14 @@
       "defaultTips": "Who will be THE one?",
       "donateTips": "Thanks for you donation!",
       "wechat": "WeChat Pay",
-      "paypal": "Paypal"
+      "paypal": "Paypal",
+      "settings": "Settings",
+      "common": "Common",
+      "yes": "Yes",
+      "no": "No",
+      "commonSettings": {
+        "multiTimesChosenLabel": "If multi-times chosen on same image allowed?"
+      }
     },
     "message": {
       "noImage": "Image file not found",
@@ -28,7 +38,9 @@
       "commonError": "Error happened :(",
       "nextTime": "Yes, you said next time.",
       "donatedTipsTitle": "Thanks for your donation!",
-      "donatedTipsMessage": "I'm sure this is not a miss-click. Please send your donation screenshots to my email: wenjian.jiang@foxmail.com to let me know you and thank you！"
+      "donatedTipsMessage": "I'm sure this is not a miss-click. Please send your donation screenshots to my email: wenjian.jiang@foxmail.com to let me know you and thank you！",
+      "settingsSavedTitle": "Settings saved!",
+      "settingsSavedMessage": "All settings are saved, please select your image folder again to make new settings work."
     }
   }
 }

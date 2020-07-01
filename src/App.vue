@@ -20,15 +20,17 @@
             </el-dropdown-menu>
           </el-dropdown>
         </div>
+
+        <div class="toolbar-btn-wrapper">
+          <el-button :disabled="rolling" class="toolbar-btn" circle @click="showSettingsDialog">
+            <i class="fas fa-cog"></i>
+          </el-button>
+          <span class="toolbar-btn-status">{{ $t("luckyYou.button.settings") }}</span>
+        </div>
+
         <div class="toolbar-btn-wrapper">
           <el-button class="toolbar-btn" circle @click="showDonateDialog">
             <i class="fas fa-donate"></i>
-          </el-button>
-          <span class="toolbar-btn-status">{{ $t("luckyYou.button.donate") }}</span>
-        </div>
-        <div class="toolbar-btn-wrapper">
-          <el-button class="toolbar-btn" circle @click="showSettingsDialog">
-            <i class="fas fa-cog"></i>
           </el-button>
           <span class="toolbar-btn-status">{{ $t("luckyYou.button.donate") }}</span>
         </div>
@@ -61,6 +63,7 @@
     </el-row>
     <footer-component></footer-component>
     <donate-dialog ref="donateDialog"></donate-dialog>
+    <settings-dialog ref="settingsDialog"></settings-dialog>
   </div>
 </template>
 
@@ -69,13 +72,15 @@ import { readBinaryFile, readDir } from "tauri/api/fs";
 import { open } from "tauri/api/dialog";
 import { Howl } from "howler";
 import DonateDialog from "./components/DonateDialog";
-import FooterComponent from "./components/FooterComponent"
+import FooterComponent from "./components/FooterComponent";
+import SettingsDialog from "./components/SettingsDialog";
 
 export default {
   name: "App",
   components: {
     "donate-dialog": DonateDialog,
-    "footer-component": FooterComponent
+    "footer-component": FooterComponent,
+    "settings-dialog": SettingsDialog
   },
   data() {
     return {
@@ -84,6 +89,7 @@ export default {
       folderPath: null,
       images: [],
       idx: 0,
+      prevIdx: 0,
       stop: false,
       itv: null,
       startBtnText: this.$t("luckyYou.button.start"),
@@ -98,7 +104,12 @@ export default {
         success: null
       },
       isPlaySound: true,
-      donateDialogVisible: false
+      donateDialogVisible: false,
+      config: {
+        common: {
+          isMultiTimesChosenAllowed: false
+        }
+      }
     };
   },
   computed: {
@@ -112,6 +123,9 @@ export default {
     }
   },
   methods: {
+    showSettingsDialog() {
+      this.$refs["settingsDialog"] && this.$refs["settingsDialog"].showDialog();
+    },
     showDonateDialog() {
       this.$refs["donateDialog"] && this.$refs["donateDialog"].showDialog();
     },
@@ -203,9 +217,11 @@ export default {
       }
       this.stop = false;
       this.itv = setInterval(() => {
+        this.prevIdx = this.idx;
         this.imageUrl = this.images[this.idx].uri;
         this.selectedImageFileName = this.images[this.idx].name;
         if (this.stop) {
+          console.log(this.idx)
           return;
         }
         this.idx = this.idx + 1 >= this.images.length ? 0 : this.idx + 1;
@@ -222,9 +238,34 @@ export default {
       if (this.isPlaySound) {
         this.stopRollingSound();
       }
+      if (!this.config.common.isMultiTimesChosenAllowed) {
+        this.removeChosedImage();
+      }
+      if (this.images.length <= 1) {
+        this.$message({
+          type: "error",
+          message:
+            "There is only 1 image left, please re-select image folder to start"
+        });
+        this.btnType = "";
+        this.startBtnText = this.$t("luckyYou.button.start");
+        this.readyForRoll = false;
+        return;
+      }
       this.itv = null;
       this.btnType = "success";
       this.startBtnText = this.$t("luckyYou.button.start");
+    },
+    removeChosedImage() {
+      if (this.images.length <= 1) {
+        this.images = [];
+        return;
+      }
+      const temp = this.images
+        .slice(0, this.prevIdx)
+        .concat(this.images.slice(this.prevIdx + 1, this.images.length));
+      this.idx = Math.min(this.prevIdx, temp.length - 1);
+      this.images = temp;
     },
     startRoll() {
       if (this.rolling) {
@@ -351,9 +392,16 @@ export default {
           return false;
         }
       });
+    },
+    loadConfig() {
+      if (localStorage && localStorage.getItem("luckyYou.config")) {
+        this.config = JSON.parse(localStorage.getItem("luckyYou.config"));
+      }
     }
   },
   mounted() {
+    this.loadConfig();
+    console.log(this.config.common.isMultiTimesChosenAllowed);
     this.sound.rolling = new Howl({
       src: ["rolling.mp3"],
       loop: true

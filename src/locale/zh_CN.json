@@ -11,7 +11,10 @@
       "readingImage": "图片读取中...",
       "donate": "捐赠",
       "nextTime": "下次一定",
-      "donated": "我已捐赠"
+      "donated": "我已捐赠",
+      "confirm": "确定",
+      "settings": "设置",
+      "cancel": "取消"
     },
     "text": {
       "muted": "声音:关",
@@ -19,7 +22,14 @@
       "defaultTips": "幸运之子会是谁呢？",
       "donateTips": "感谢你的捐赠!",
       "wechat": "微信",
-      "paypal": "贝宝"
+      "paypal": "贝宝",
+      "settings": "设置",
+      "common": "通用",
+      "yes": "是",
+      "no": "否",
+      "commonSettings": {
+        "multiTimesChosenLabel": "是否允许一张图片被多次选中?"
+      }
     },
     "message": {
       "noImage": "未找到图片文件",
@@ -28,7 +38,9 @@
       "commonError": "出错啦 :(",
       "nextTime": "下次，一定",
       "donatedTipsTitle": "感谢你的捐赠!",
-      "donatedTipsMessage": "我想你应该不是点错了按钮了。请将你捐赠的截图发到我的邮箱：wenjian.jiang@foxmail.com 以便我记录和感谢！"
+      "donatedTipsMessage": "我想你应该不是点错了按钮了。请将你捐赠的截图发到我的邮箱：wenjian.jiang@foxmail.com 以便我记录和感谢！",
+      "settingsSavedTitle": "设置已保存！",
+      "settingsSavedMessage": "所有的设置项都已保存，请重新选择图片文件夹来使其生效。"
     }
   }
 }

@@ -1,25 +1,31 @@
 <template>
   <el-dialog
-    :title="$t('luckyYou.button.donate')"
+    :title="$t('luckyYou.button.settings')"
     :visible.sync="visible"
     width="60%"
     :show-close="false"
     :close-on-click-modal="false"
+    :close-on-press-escape="false"
   >
     <div class="wrapper">
-      <h4>{{ $t("luckyYou.text.donateTips") }}</h4>
       <el-tabs v-model="tabName">
-        <el-tab-pane :label="$t('luckyYou.text.wechat')" name="common">
-          <img src="/wechat.png" />
-        </el-tab-pane>
-        <el-tab-pane :label="$t('luckyYou.text.paypal')" name="paypal">
-          <a href="http://paypal.me/jwenjian/1" target="_blank">{{$t('luckyYou.text.paypal')}}</a>
+        <el-tab-pane :label="$t('luckyYou.text.common')" name="common">
+          <div class="settings-item-wrapper">
+            <div class="label">{{ $t("luckyYou.text.commonSettings.multiTimesChosenLabel") }}</div>
+            <div class="form-item">
+              <el-switch
+                v-model="config.common.isMultiTimesChosenAllowed"
+                :active-text="$t('luckyYou.text.yes')"
+                :inactive-text="$t('luckyYou.text.no')"
+              ></el-switch>
+            </div>
+          </div>
         </el-tab-pane>
       </el-tabs>
     </div>
     <span slot="footer">
-      <el-button @click="onNextTime">{{ $t("luckyYou.button.nextTime") }}</el-button>
-      <el-button type="primary" @click="onDonated">{{ $t("luckyYou.button.donated") }}</el-button>
+      <el-button @click="onCancel">{{ $t("luckyYou.button.cancel") }}</el-button>
+      <el-button type="primary" @click="onConfirm">{{ $t("luckyYou.button.confirm") }}</el-button>
     </span>
   </el-dialog>
 </template>
@@ -30,29 +36,40 @@ export default {
   data() {
     return {
       visible: false,
-      tabName: "common"
+      tabName: "common",
+      config: {
+        common: {
+          isMultiTimesChosenAllowed: false
+        }
+      }
     };
   },
   methods: {
     showDialog() {
+      this.loadSettings();
       this.visible = true;
     },
-    onNextTime() {
-      this.$message({
-        type: "info",
-        message: this.$t("luckyYou.message.nextTime")
-      });
+    onCancel() {
       this.visible = false;
     },
-    onDonated() {
+    onConfirm() {
+      this.saveSettings();
       // say thanks
       this.$notify({
         type: "success",
-        title: this.$t("luckyYou.message.donatedTipsTitle"),
-        message: this.$t("luckyYou.message.donatedTipsMessage"),
+        title: this.$t("luckyYou.message.settingsSavedTitle"),
+        message: this.$t("luckyYou.message.settingsSavedMessage"),
         duration: 0
       });
       this.visible = false;
+    },
+    loadSettings() {
+      if (localStorage && localStorage.getItem("luckyYou.config")) {
+        this.config = JSON.parse(localStorage.getItem("luckyYou.config"));
+      }
+    },
+    saveSettings() {
+      localStorage.setItem("luckyYou.config", JSON.stringify(this.config));
     }
   }
 };
@@ -61,5 +78,15 @@ export default {
 <style>
 .el-dialog {
   margin-top: 5vh;
+}
+.settings-item-wrapper {
+  text-align: left;
+  padding-left: 1ch;
+  border-left: 1px solid #909399;
+  margin-bottom: 2ch;
+}
+.settings-item-wrapper .label {
+  color: #909399;
+  margin-bottom: 1ch;
 }
 </style>
