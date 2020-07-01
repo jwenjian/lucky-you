@@ -50,7 +50,11 @@
 
     <el-row justify="center" class="btn-row">
       <el-col :span="12" :offset="6">
-        <el-button :disabled="!readyForRoll" :type="btnType" @click="startRoll">{{ startBtnText }} ({{ images.length }})</el-button>
+        <el-button
+          :disabled="!readyForRoll"
+          :type="btnType"
+          @click="startRoll"
+        >{{ startBtnText }} ({{ images.length }})</el-button>
         <el-button
           :disabled="rolling"
           type="text"
@@ -74,6 +78,7 @@ import { Howl } from "howler";
 import DonateDialog from "./components/DonateDialog";
 import FooterComponent from "./components/FooterComponent";
 import SettingsDialog from "./components/SettingsDialog";
+import { Notification } from 'element-ui'
 
 export default {
   name: "App",
@@ -211,7 +216,33 @@ export default {
     playSuccessSound() {
       this.sound.success.play();
     },
+    showLastImageNotification() {
+      // close all current notifications
+      Notification.closeAll()
+      const image = this.images[0];
+      const h = this.$createElement;
+      this.$notify({
+        type: "warning",
+        title: this.$t("luckyYou.message.lastImageTitle"),
+        message: h("div", {}, [
+          h("img", {
+            attrs: { src: image.uri },
+            style: { width: "80px", height: "80px" }
+          }),
+          h("p", {}, image.name)
+        ]),
+        duration: 0
+      });
+      this.images = [];
+    },
     doStart() {
+      if (this.images.length === 1) {
+        this.readyForRoll = false;
+        this.showLastImageNotification();
+        // set rolling to true to make select image folder button available
+        this.rolling = true;
+        return;
+      }
       if (this.isPlaySound) {
         this.playRollingSound();
       }
@@ -221,7 +252,6 @@ export default {
         this.imageUrl = this.images[this.idx].uri;
         this.selectedImageFileName = this.images[this.idx].name;
         if (this.stop) {
-          console.log(this.idx)
           return;
         }
         this.idx = this.idx + 1 >= this.images.length ? 0 : this.idx + 1;
@@ -240,17 +270,6 @@ export default {
       }
       if (!this.config.common.isMultiTimesChosenAllowed) {
         this.removeChosedImage();
-      }
-      if (this.images.length <= 1) {
-        this.$message({
-          type: "error",
-          message:
-            "There is only 1 image left, please re-select image folder to start"
-        });
-        this.btnType = "";
-        this.startBtnText = this.$t("luckyYou.button.start");
-        this.readyForRoll = false;
-        return;
       }
       this.itv = null;
       this.btnType = "success";
@@ -271,9 +290,13 @@ export default {
       if (this.rolling) {
         this.doStop();
       } else {
+        console.log(this.rolling)
         this.doStart();
+        console.log(this.rolling)
       }
+      console.log(this.rolling)
       this.rolling = !this.rolling;
+      console.log(this.rolling)
     },
     arrayBufferToBase64(buffer, callback) {
       var blob = new Blob([buffer], {
@@ -325,6 +348,8 @@ export default {
                 name: this.shortenImageName(f.name)
               });
               if (this.images.length === imgs.length) {
+                // reload config items
+                this.loadConfig()
                 this.btnType = "success";
                 this.startBtnText = this.$t("luckyYou.button.start");
                 this.readyForRoll = true;
