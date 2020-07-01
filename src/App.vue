@@ -50,7 +50,7 @@
 
     <el-row justify="center" class="btn-row">
       <el-col :span="12" :offset="6">
-        <el-button :disabled="!readyForRoll" :type="btnType" @click="startRoll">{{ startBtnText }}</el-button>
+        <el-button :disabled="!readyForRoll" :type="btnType" @click="startRoll">{{ startBtnText }} ({{ images.length }})</el-button>
         <el-button
           :disabled="rolling"
           type="text"
