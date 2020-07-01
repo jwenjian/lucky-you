@@ -53,6 +53,17 @@ We support 2 languages for now, you can click this button to switch to your lang
 
 3. Your image file name better be short(like less than 10 words), otherwise it may be wrapped and replaced with `...`
 
+### Tested OS
+
+- Linux
+  - Ubuntu
+    - 20.04
+
+- Mac OS
+  - 10.15.5
+
+> If you tested this app successfully on your OS that not listed here, welcome to submit an issue to tell us.
+
 ### Known Issues 
 
 Here are some known issues that need to be fixed:

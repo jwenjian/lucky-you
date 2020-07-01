@@ -26,6 +26,12 @@
           </el-button>
           <span class="toolbar-btn-status">{{ $t("luckyYou.button.donate") }}</span>
         </div>
+        <div class="toolbar-btn-wrapper">
+          <el-button class="toolbar-btn" circle @click="showSettingsDialog">
+            <i class="fas fa-cog"></i>
+          </el-button>
+          <span class="toolbar-btn-status">{{ $t("luckyYou.button.donate") }}</span>
+        </div>
       </el-col>
     </el-row>
     <el-row justify="space-between" class="img-row">
@@ -53,25 +59,7 @@
         <div class="item"></div>
       </el-col>
     </el-row>
-
-    <el-row class="footer-row">
-      <el-col :span="12">
-        <p>
-          Made with ❤️ by
-          <a href="https://github.com/jwenjian" target="_blank">jwenjian</a>
-        </p>
-        <span class="copyright">
-          Icons made by
-          <i>Freepik</i> from
-          <u>www.flaticon.com</u>
-        </span>
-        <span class="copyright">
-          Sound made by
-          <i>pierrecartoons1979</i> from
-          <u>freesound.org</u>
-        </span>
-      </el-col>
-    </el-row>
+    <footer-component></footer-component>
     <donate-dialog ref="donateDialog"></donate-dialog>
   </div>
 </template>
@@ -81,11 +69,13 @@ import { readBinaryFile, readDir } from "tauri/api/fs";
 import { open } from "tauri/api/dialog";
 import { Howl } from "howler";
 import DonateDialog from "./components/DonateDialog";
+import FooterComponent from "./components/FooterComponent"
 
 export default {
   name: "App",
   components: {
-    "donate-dialog": DonateDialog
+    "donate-dialog": DonateDialog,
+    "footer-component": FooterComponent
   },
   data() {
     return {
@@ -408,22 +398,14 @@ html body {
 .btn-row {
   margin-top: 0.5em;
 }
-.footer-row {
-  font-size: smaller;
-  text-align: left;
-  padding-left: 1em;
-  margin-top: 2em;
-}
+
 #file-name-item {
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.copyright {
-  display: block;
-  font-size: smaller;
-}
+
 .toolbar-row {
   margin-top: 0.5em;
 }
