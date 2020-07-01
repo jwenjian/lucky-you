@@ -7,6 +7,7 @@
     width="60%"
     :show-close="false"
     :close-on-click-modal="false"
+    :close-on-press-escape="false"
   >
     <div class="wrapper">
       <h4>{{ $t("luckyYou.text.donateTips") }}</h4>
