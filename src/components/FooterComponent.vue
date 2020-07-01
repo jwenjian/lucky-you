@@ -6,6 +6,9 @@
         <a href="https://github.com/jwenjian" target="_blank">jwenjian</a>
       </p>
       <span class="copyright">
+        Version: v{{ version }}
+      </span>
+      <span class="copyright">
         Icons made by
         <i>Freepik</i> from
         <u>www.flaticon.com</u>
@@ -20,10 +23,17 @@
 </template>
 
 <script>
+const VERSION = require('../../package.json').version
+
 export default {
   name: 'footer-component',
   data() {
-    return {}
+    return {
+      version: VERSION
+    }
+  },
+  mounted() {
+    console.log(VERSION)
   }
 };
 </script>

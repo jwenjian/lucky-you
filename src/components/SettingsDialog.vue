@@ -39,7 +39,7 @@ export default {
       tabName: "common",
       config: {
         common: {
-          isMultiTimesChosenAllowed: false
+          isMultiTimesChosenAllowed: true
         }
       }
     };
