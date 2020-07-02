@@ -6,7 +6,7 @@ LuckyYou is a simple app build on [tauri](https://github.com/tauri-apps/tauri) f
 
 ## Screenshots
 
-![截屏2020-06-28 下午12.44.23.png](https://i.loli.net/2020/06/28/yfMEjJzgWKcn79L.png)
+![截屏2020-07-02 下午9.48.48.png](https://i.loli.net/2020/07/02/YdMAVhbyqBIuS19.png)
 
 ## Install
 
@@ -44,6 +44,20 @@ Click this button can toggle between mute / unmute status, if the status is mute
 #### Language switch button
 
 We support 2 languages for now, you can click this button to switch to your language
+
+### Settings button
+
+Click to show settings dialog:
+
+#### Common Settings
+
+- Is multi-chose on same image allowed? [ Yes / No ]
+
+  - Yes, One image maybe chosed more than once
+  - No, Once the image being chosed, it will be exclued from later rolling.
+
+> Note that: If set to [ No ], You can only runs x times in which x = image file count, when all the images are chosed, you must select the image folder again to continue.
+
 
 ## Note
 
