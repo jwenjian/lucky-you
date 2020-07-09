@@ -12,7 +12,7 @@ build = "src/build.rs"
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = [ "derive" ] }
-tauri = { version = "0.6.2", features = [ "all-api", "edge" ] }
+tauri = { version = "0.7.1", features = [ "all-api", "edge", "cli" ] }
 
 [patch.crates-io]
 web-view = { git = "https://github.com/tauri-apps/web-view.git", branch = "master" }

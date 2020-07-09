@@ -24,7 +24,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
-    "vue-cli-plugin-tauri": "~0.7.0",
+    "vue-cli-plugin-tauri": "^0.8.0",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {

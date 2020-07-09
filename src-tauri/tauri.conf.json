@@ -7,7 +7,7 @@
   },
   "ctx": {},
   "tauri": {
-    "cli": null,
+    "cli": {},
     "embeddedServer": {
       "active": true
     },
