@@ -76,6 +76,10 @@ Click to show settings dialog:
 - Mac OS
   - 10.15.5
 
+- Windows
+  - Windows server 2019 datecenter
+    - 1809
+
 > If you tested this app successfully on your OS that not listed here, welcome to submit an issue to tell us.
 
 ### Known Issues 

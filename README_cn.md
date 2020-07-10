@@ -73,6 +73,10 @@ LuckyYou 是一个基于 [tauri](https://github.com/tauri-apps/tauri) 框架开�
 - Mac OS
   - 10.15.5
 
+- Windows
+  - Windows server 2019 datecenter
+    - 1809
+
 > 如果你已经在你的操作系统上成功安装运行了此软件，但是这里并没有列出你的操作系统，欢迎你提出一个 Issue 来告诉我们。
 
 ### 已知问题
