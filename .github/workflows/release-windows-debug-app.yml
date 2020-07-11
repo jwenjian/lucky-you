@@ -6,73 +6,6 @@ on:
       - dev
 
 jobs:
-  check-windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: setup node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - name: get version and set env
-        run: |
-          dir
-          $env:PACKAGE_VERSION=$(node -p "require('.\\package.json').version")
-          echo %PACKAGE_VERSION%
-          dir
-  check-build:
-    needs: check-windows
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: setup node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - name: install rust stable
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          profile: minimal
-      - name: install webkit2gtk
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y webkit2gtk-4.0
-      - run: yarn
-      - name: build LuckyYou for tauri app
-        run: yarn build
-      - run: cargo install tauri-bundler --force
-      - name: build tauri app
-        run: npx tauri build --debug
-
-  create-release:
-    needs: check-build
-    runs-on: ubuntu-latest
-    outputs:
-      RELEASE_UPLOAD_URL: ${{ steps.create_tauri_release.outputs.upload_url }}
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: setup node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - name: get version
-        run: echo ::set-env name=PACKAGE_VERSION::$(node -p "require('./package.json').version")
-      - name: create release
-        id: create_tauri_release
-        uses: jbolda/create-release@v1.1.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v${{ env.PACKAGE_VERSION }}
-          release_name: "Release debug version of LuckyYou app v${{ env.PACKAGE_VERSION }}"
-          body: "See the assets to download this version and install."
-          draft: true
-          prerelease: false
-
   create-and-upload-assets:
     needs: create-release
     runs-on: ${{ matrix.platform }}
@@ -106,6 +39,7 @@ jobs:
       - name: build tauri app
         run: |
           cd src-tauri && cargo update && cd ../
+          npm run tauri:build
           npx tauri build --debug
       - name: get version
         run: echo ::set-env name=PACKAGE_VERSION::$(node -p "require('./package.json').version")
