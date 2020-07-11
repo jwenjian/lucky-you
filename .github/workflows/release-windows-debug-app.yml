@@ -7,7 +7,6 @@ on:
 
 jobs:
   create-and-upload-assets:
-    needs: create-release
     runs-on: ${{ matrix.platform }}
     timeout-minutes: 30
 
