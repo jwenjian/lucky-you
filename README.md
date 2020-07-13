@@ -4,6 +4,8 @@
 
 LuckyYou is a simple app build on [tauri](https://github.com/tauri-apps/tauri) framework to provide a crossplatform application to do a lucky draw or make a roll call on your class or similar use cases.
 
+> Pay attention please if you are using Windows：If current windows app not working for you, please use this [PWA APP](https://luckyyou.netlify.app) instead for now.
+
 ## Screenshots
 
 ![截屏2020-07-02 下午9.48.48.png](https://i.loli.net/2020/07/02/YdMAVhbyqBIuS19.png)
