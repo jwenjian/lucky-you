@@ -1,6 +1,6 @@
 {
   "name": "lucky-you",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "description": "A cross platform app to choose lucky you based on tauri",
   "scripts": {
@@ -18,9 +18,9 @@
     "vue-i18n": "^8.18.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.4.0",
-    "@vue/cli-plugin-eslint": "~4.4.0",
-    "@vue/cli-service": "~4.4.0",
+    "@vue/cli-plugin-babel": "^4.4.6",
+    "@vue/cli-plugin-eslint": "^4.4.6",
+    "@vue/cli-service": "^4.4.6",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",

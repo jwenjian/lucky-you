@@ -1,0 +1,90 @@
+name: release-windows-debug-app
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    outputs:
+      RELEASE_UPLOAD_URL: ${{ steps.create_tauri_release.outputs.upload_url }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: get version
+        run: echo ::set-env name=PACKAGE_VERSION::$(node -p "require('./package.json').version")
+      - name: create release
+        id: create_tauri_release
+        uses: jbolda/create-release@v1.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ env.PACKAGE_VERSION }}
+          release_name: "Release windows debug version of LuckyYou app v${{ env.PACKAGE_VERSION }}"
+          body: "See the assets to download this version and install."
+          draft: true
+          prerelease: false
+
+  create-and-upload-assets:
+    needs: create-release
+    runs-on: ${{ matrix.platform }}
+    timeout-minutes: 30
+
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [windows-latest]
+        include:
+          - platform: windows-latest
+            buildFolder: ''
+            ext: ".x64.msi"
+            compressed: ''
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: install rust stable
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+      - run: cargo install tauri-bundler --force
+      - run: yarn
+      - name: build LuckyYou for tauri app
+        run: yarn build
+      - name: build tauri app
+        run: |
+          cd src-tauri && cargo update && cd ../
+          npm run tauri:build
+          npx tauri build --debug
+      - name: get version
+        run: echo ::set-env name=PACKAGE_VERSION::$(node -p "require('./package.json').version")
+      - name: add version info for msi files
+        if: matrix.platform == 'windows-latest'
+        run: |
+          dir
+          $env:PACKAGE_VERSION=$(node -p "require('.\\package.json').version")
+      - name: add version info for msi files
+        if: matrix.platform == 'windows-latest'
+        working-directory: ${{ format('./src-tauri/target/debug/{0}', matrix.buildFolder ) }}
+        run: |
+          ren LuckyYou.x64.msi LuckyYou_${{ env.PACKAGE_VERSION }}.x64.msi
+      - name: upload release asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create-release.outputs.RELEASE_UPLOAD_URL }}
+          asset_path: ${{ format('./src-tauri/target/debug/{0}/LuckyYou_{1}{2}{3}', matrix.buildFolder, env.PACKAGE_VERSION, matrix.ext, matrix.compressed ) }}
+          asset_name: ${{ format('LuckyYou_debug_{0}{1}{2}', env.PACKAGE_VERSION, matrix.ext, matrix.compressed ) }}
+          asset_content_type: application/zip

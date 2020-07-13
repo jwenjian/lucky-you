@@ -290,13 +290,9 @@ export default {
       if (this.rolling) {
         this.doStop();
       } else {
-        console.log(this.rolling)
         this.doStart();
-        console.log(this.rolling)
       }
-      console.log(this.rolling)
       this.rolling = !this.rolling;
-      console.log(this.rolling)
     },
     arrayBufferToBase64(buffer, callback) {
       var blob = new Blob([buffer], {

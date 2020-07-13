@@ -2,6 +2,8 @@
 
 LuckyYou 是一个基于 [tauri](https://github.com/tauri-apps/tauri) 框架开发的跨平台软件，你可以用它来做抽奖活动或者课堂点名或者其他类似的使用场景中。
 
+> Winodws 用户请注意：如果现在的 Windows 安装包不能正常使用，可暂时使用这个 [PWA应用](https://luckyyou.netlify.app)
+
 ## 截图
 
 ![截屏2020-07-02 下午9.48.54.png](https://i.loli.net/2020/07/02/KjhqGRrbJpCMIl9.png)
@@ -72,6 +74,10 @@ LuckyYou 是一个基于 [tauri](https://github.com/tauri-apps/tauri) 框架开�
 
 - Mac OS
   - 10.15.5
+
+- Windows
+  - Windows server 2019 datecenter
+    - 1809
 
 > 如果你已经在你的操作系统上成功安装运行了此软件，但是这里并没有列出你的操作系统，欢迎你提出一个 Issue 来告诉我们。
 
