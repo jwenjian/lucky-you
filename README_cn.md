@@ -1,5 +1,7 @@
 # Lucky You
 
+[![pas](https://img.shields.io/static/v1?&message=ProgressiveApp.Store&color=74b9ff&style=flat&label=Follow%20Lucky%20You%20at)](https://progressiveapp.store/pwa/Lucky-You)
+
 LuckyYou 是一个基于 [tauri](https://github.com/tauri-apps/tauri) 框架开发的跨平台软件，你可以用它来做抽奖活动或者课堂点名或者其他类似的使用场景中。
 
 ⚠️Winodws 用户请注意：如果现在的 Windows 安装包不能正常使用，可暂时使用这个 [PWA应用](https://luckyyou.netlify.app) ([如何使用?](https://github.com/jwenjian/lucky-you/wiki/PWA-App))
