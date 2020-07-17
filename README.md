@@ -1,5 +1,7 @@
 # Lucky You
 
+[![pas](https://img.shields.io/static/v1?&message=ProgressiveApp.Store&color=74b9ff&style=flat&label=Follow%20Lucky%20You%20at)](https://progressiveapp.store/pwa/Lucky-You)
+
 [中文简介](README_cn.md)
 
 LuckyYou is a simple app build on [tauri](https://github.com/tauri-apps/tauri) framework to provide a crossplatform application to do a lucky draw or make a roll call on your class or similar use cases.
