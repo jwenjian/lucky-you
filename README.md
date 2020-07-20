@@ -8,6 +8,11 @@ LuckyYou is a simple app build on [tauri](https://github.com/tauri-apps/tauri) f
 
 > Pay attention please if you are using Windows：If current windows app not working for you, please use this [PWA APP](https://luckyyou.netlify.app) instead for now.([How to use?](https://github.com/jwenjian/lucky-you/wiki/PWA-App))
 
+PWA app is on ProductHunt!
+
+<a href="https://www.producthunt.com/posts/lucky-you?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-lucky-you" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=219757&theme=light" alt="Lucky You - A free, simple, beautiful PWA app to do a lucky draw. | Product Hunt Embed" style="width: 250px; height: 54px;" width="250px" height="54px" /></a>
+
+
 ## Screenshots
 
 ![截屏2020-07-02 下午9.48.48.png](https://i.loli.net/2020/07/02/YdMAVhbyqBIuS19.png)
