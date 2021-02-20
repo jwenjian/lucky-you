@@ -99,7 +99,7 @@ Here are some known issues that need to be fixed:
 
 ## Donation
 
-Thanks for your donation, your donation will encourege me to add more feature and fix bugs if has any
+Thanks for your donation, your donation will encourage me to add more feature and fix bugs if has any
 
 ### Wechat Pay
 
