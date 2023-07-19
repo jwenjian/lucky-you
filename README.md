@@ -97,18 +97,6 @@ Here are some known issues that need to be fixed:
 
 1. Cannot start app on Win7 Enterprise version with this error: "Entry Point Not Found in ole32.dll"
 
-## Donation
-
-Thanks for your donation, your donation will encourege me to add more feature and fix bugs if has any
-
-### Wechat Pay
-
-![](public/wechat.png)
-
-### Paypal
-
-[jwenjian@paypal.me](https://paypal.me/jwenjian/1)
-
 ## License
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/">Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License</a>.
