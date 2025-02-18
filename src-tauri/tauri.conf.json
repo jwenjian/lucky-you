@@ -1,62 +1,35 @@
 {
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "lucky-you",
+  "version": "0.1.0",
+  "identifier": "com.github.jwenjian.luckyyou",
   "build": {
-    "distDir": "../dist_tauri/bundled",
-    "devPath": "http://localhost:3000",
-    "beforeDevCommand": "",
-    "beforeBuildCommand": ""
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
   },
-  "ctx": {},
-  "tauri": {
-    "cli": {},
-    "embeddedServer": {
-      "active": true
-    },
-    "bundle": {
-      "active": true,
-      "targets": "all",
-      "identifier": "com.github.jwenjian.luckyyou",
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ],
-      "resources": [],
-      "externalBin": [],
-      "copyright": "",
-      "category": "DeveloperTool",
-      "shortDescription": "",
-      "longDescription": "",
-      "deb": {
-        "depends": [],
-        "useBootstrapper": false
-      },
-      "osx": {
-        "frameworks": [],
-        "minimumSystemVersion": "",
-        "useBootstrapper": false
-      },
-      "exceptionDomain": ""
-    },
-    "whitelist": {
-      "all": true
-    },
-    "window": {
-      "title": "Lucky You",
-      "width": 800,
-      "height": 600,
-      "resizable": false,
-      "fullscreen": false
-    },
+  "app": {
+    "windows": [
+      {
+        "title": "lucky-you",
+        "width": 800,
+        "height": 600
+      }
+    ],
     "security": {
-      "csp": "default-src blob: data: filesystem: ws: http: https: 'unsafe-eval' 'unsafe-inline'"
-    },
-    "edge": {
-      "active": true
-    },
-    "inliner": {
-      "active": true
+      "csp": null
     }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
   }
 }

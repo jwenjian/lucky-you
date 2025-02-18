@@ -72,12 +72,12 @@
 </template>
 
 <script>
-import { readBinaryFile, readDir } from "tauri/api/fs";
-import { open } from "tauri/api/dialog";
+import { readFile, readDir } from "@tauri-apps/plugin-fs";
+import { open } from "@tauri-apps/plugin-dialog";
 import { Howl } from "howler";
-import DonateDialog from "./components/DonateDialog";
-import FooterComponent from "./components/FooterComponent";
-import SettingsDialog from "./components/SettingsDialog";
+import DonateDialog from "./components/DonateDialog.vue";
+import FooterComponent from "./components/FooterComponent.vue";
+import SettingsDialog from "./components/SettingsDialog.vue";
 import { Notification } from 'element-ui'
 
 export default {
@@ -335,7 +335,7 @@ export default {
 
       this.images = [];
       imgs.forEach(f => {
-        readBinaryFile(f.path)
+        readFile(f.path)
           .then(res => {
             this.arrayBufferToBase64(new Uint8Array(res), b64 => {
               this.images = this.images.concat({

@@ -23,17 +23,17 @@
 </template>
 
 <script>
-const VERSION = require('../../package.json').version
+import packageJson from '../../package.json';
 
 export default {
   name: 'footer-component',
   data() {
     return {
-      version: VERSION
+      version: packageJson.version
     }
   },
   mounted() {
-    console.log(VERSION)
+    console.log(packageJson.version)
   }
 };
 </script>
