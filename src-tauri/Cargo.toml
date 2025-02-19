@@ -1,8 +1,8 @@
 [package]
-name = "lucky-you"
-version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
+name = "LuckyYou"
+version = "2.0.0"
+description = "A cross-platform application made lucky draw easy and fun."
+authors = ["jwenjian@github"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

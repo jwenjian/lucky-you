@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <el-row justify="space-between" class="toolbar-row">
+    <div class="toolbar-wrapper">
+      <el-row justify="space-between" class="toolbar-row">
       <el-col :span="6" :offset="18" class="toolbar-section">
         <div class="toolbar-btn-wrapper">
           <el-button :disabled="rolling" class="toolbar-btn" circle @click="toggleSound">
@@ -36,6 +37,8 @@
         </div>
       </el-col>
     </el-row>
+    </div>
+    
     <div class="content-wrapper">
       <div>
         <el-row justify="space-between" class="img-row">
@@ -485,6 +488,9 @@ html body {
 
 .toolbar-row {
   margin-top: 0.5em;
+}
+.toolbar-wrapper {
+  width: 100vw;
   position: fixed;
   top: 0;
   right: 0;

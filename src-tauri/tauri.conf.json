@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "lucky-you",
-  "version": "0.1.0",
+  "productName": "LuckyYou",
+  "version": "2.0.0",
   "identifier": "com.github.jwenjian.luckyyou",
   "build": {
     "beforeDevCommand": "npm run dev",
@@ -12,9 +12,9 @@
   "app": {
     "windows": [
       {
-        "title": "lucky-you",
-        "width": 800,
-        "height": 600
+        "title": "Lucky You",
+        "width": 1280,
+        "height": 720
       }
     ],
     "security": {
