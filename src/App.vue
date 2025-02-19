@@ -36,7 +36,9 @@
         </div>
       </el-col>
     </el-row>
-    <el-row justify="space-between" class="img-row">
+    <div class="content-wrapper">
+      <div>
+        <el-row justify="space-between" class="img-row">
       <el-col :span="12" :offset="6">
         <img id="the-img" :src="imageUrl" />
       </el-col>
@@ -65,6 +67,9 @@
         <div class="item"></div>
       </el-col>
     </el-row>
+      </div>
+      
+    </div>
     <footer-component></footer-component>
     <donate-dialog ref="donateDialog"></donate-dialog>
     <settings-dialog ref="settingsDialog"></settings-dialog>
@@ -74,6 +79,7 @@
 <script>
 import { readFile, readDir } from "@tauri-apps/plugin-fs";
 import { open } from "@tauri-apps/plugin-dialog";
+import { family } from "@tauri-apps/plugin-os";
 import { Howl } from "howler";
 import DonateDialog from "./components/DonateDialog.vue";
 import FooterComponent from "./components/FooterComponent.vue";
@@ -305,7 +311,7 @@ export default {
       };
       reader.readAsDataURL(blob);
     },
-    convertFile2Images(files) {
+    convertFile2Images(dir, files) {
       // [{path, is_dir, name}]
       if (!files) {
         return [];
@@ -334,12 +340,13 @@ export default {
       }
 
       this.images = [];
+      let separator = family() === 'windows' ? '\\' : '/';
       imgs.forEach(f => {
-        readFile(f.path)
+        readFile(`${dir +  separator + f.name}`)
           .then(res => {
             this.arrayBufferToBase64(new Uint8Array(res), b64 => {
               this.images = this.images.concat({
-                path: f.path,
+                path: `${dir + separator + f.name}`,
                 uri: "data:image/png;base64," + b64,
                 name: this.shortenImageName(f.name)
               });
@@ -387,7 +394,7 @@ export default {
       this.btnType = "";
       this.readyForRoll = false;
       this.startBtnText = this.$t("luckyYou.button.readingImage");
-      this.convertFile2Images(files);
+      this.convertFile2Images(dir, files);
     },
     reset() {
       this.imageUrl = "/casino.png";
@@ -438,7 +445,7 @@ export default {
 html body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  height: 100vh;
   background-color: white;
   background-size: cover;
   background-image: url("/bg.png");
@@ -449,6 +456,7 @@ html body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: black;
+  height: 100%;
 }
 #the-img {
   width: 300px;
@@ -477,6 +485,9 @@ html body {
 
 .toolbar-row {
   margin-top: 0.5em;
+  position: fixed;
+  top: 0;
+  right: 0;
 }
 .toolbar-btn {
   margin-left: 0.5em;
@@ -495,5 +506,15 @@ html body {
 .toolbar-btn-wrapper {
   margin-left: 0.5em;
   align-content: flex-end;
+}
+.content-wrapper {
+  display: flex;
+  width: 100vw;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.content-wrapper>div {
+  width: 100vw;
 }
 </style>

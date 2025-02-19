@@ -1,6 +1,6 @@
 <template>
-  <el-row class="footer-row">
-    <el-col :span="12">
+  <div class="footer-row">
+    <div>
       <p>
         Made with ❤️ by
         <a href="https://github.com/jwenjian" target="_blank">jwenjian</a>
@@ -18,8 +18,8 @@
         <i>pierrecartoons1979</i> from
         <u>freesound.org</u>
       </span>
-    </el-col>
-  </el-row>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -44,6 +44,9 @@ export default {
   text-align: left;
   padding-left: 1em;
   margin-top: 2em;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 .copyright {
   display: block;
