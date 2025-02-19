@@ -1,6 +1,6 @@
 # Lucky You
 
-[![pas](https://img.shields.io/static/v1?&message=ProgressiveApp.Store&color=74b9ff&style=flat&label=Follow%20Lucky%20You%20at)](https://progressiveapp.store/pwa/Lucky-You)
+> Update at `2025-02-19`: New version released based on Tauri v2
 
 [中文简介](README_cn.md)
 
@@ -90,12 +90,6 @@ Click to show settings dialog:
     - 1809
 
 > If you tested this app successfully on your OS that not listed here, welcome to submit an issue to tell us.
-
-### Known Issues 
-
-Here are some known issues that need to be fixed:
-
-1. Cannot start app on Win7 Enterprise version with this error: "Entry Point Not Found in ole32.dll"
 
 ## License
 
